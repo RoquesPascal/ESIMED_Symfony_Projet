@@ -1,0 +1,7 @@
+Trucs utiles projet Symfony : 
+
+Bundle pour gérer la pagination : Pagerfanta
+
+La partie des commandes est obligatoire
+
+La partie de l'app mobile ("Accès mobile") n'est pas à faire
