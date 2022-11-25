@@ -1,6 +1,7 @@
 Trucs utiles projet Symfony : 
 
 Bundle pour gérer la pagination : Pagerfanta
+Bundle pour gérer l'enregistrement des propriétés non mapées des objets Doctrine : KnpDoctrineBehavior
 
 La partie des commandes est obligatoire
 
