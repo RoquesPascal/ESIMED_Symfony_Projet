@@ -26,9 +26,8 @@ class AdminUserController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $adminUserHash = new AdminUserHash();
             $hashedPassword = $passwordHasher->hashPassword(
-                $adminUserHash,
+                new AdminUserHash(),
                 $adminUser->getPassword()
             );
             $adminUser->setPassword($hashedPassword);
