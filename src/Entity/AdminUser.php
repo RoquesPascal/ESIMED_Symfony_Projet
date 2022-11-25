@@ -7,6 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints AS Assert;
 
 #[ORM\Entity(repositoryClass: AdminUserRepository::class)]
+#[ORM\UniqueConstraint(
+    name: 'unique_email',
+    columns: ['email']
+)]
 class AdminUser
 {
     #[ORM\Id]
