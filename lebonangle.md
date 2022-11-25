@@ -5,7 +5,7 @@ admin Symfony et une API exposée via Api Platform.
 
 ## Installation
 
-- [X] Le projet doit être créé à l'aide du binaire Symfony en utilisant la version full du framework :
+- [x] Le projet doit être créé à l'aide du binaire Symfony en utilisant la version full du framework :
 
 ```shell
 scoop install symfony-cli
@@ -59,108 +59,108 @@ AdminUser : password - string not null
 
 ## Encodage des mots de passe
 
-Lorsqu'un admin est créé ou modifié, si son plainPassword (mot de passe en clair) est renseigné, il doit être encodé et
+- [X] Lorsqu'un admin est créé ou modifié, si son plainPassword (mot de passe en clair) est renseigné, il doit être encodé et
 sauvé dans password grace
 à [un listener (ou subscriber) doctrine](https://symfony.com/doc/current/security.html#c-encoding-passwords).
 
 ## Renseignement de la date de création
 
-Lorsqu'une annonce est créée, sa date de création est automatiquement renseignée. Il en est de même pour les images.
+- [ ] Lorsqu'une annonce est créée, sa date de création est automatiquement renseignée. Il en est de même pour les images.
 
 ## Workflow des annonces
 
-Les annonces sont rattachées à un workflow. Lorsqu'elles sont créées, elles sont dans le statut `draft`. Les admins
+- [ ] Les annonces sont rattachées à un workflow. Lorsqu'elles sont créées, elles sont dans le statut `draft`. Les admins
 peuvent les publier (status `published` ) ou les rejeter (status `rejected`). Une fois publiées, elles peuvent toujours
 être rejetées.
 
-Quand une annonce passe du status `draft` à `published`, sa date de publication est automatiquement renseignée et un
+- [ ] Quand une annonce passe du status `draft` à `published`, sa date de publication est automatiquement renseignée et un
 mail de notification est envoyé à l'utilisateur qui l'a créée.
 
 ## Admin
 
-Vous devez créer un admin sous Symfony. Il n'est pas possible d'utiliser un bundle d'admin (type EasyAdminBundle).
+- [x] Vous devez créer un admin sous Symfony. Il n'est pas possible d'utiliser un bundle d'admin (type EasyAdminBundle).
 
-L'admin est accessible uniquement aux utilisateurs de type AdminUser qui s'authentifient grâce à un formulaire de
+- [ ] L'admin est accessible uniquement aux utilisateurs de type AdminUser qui s'authentifient grâce à un formulaire de
 connexion.
 
 ### Crud AdminUser
 
-Les admins peuvent lister, ajouter, mettre à jour et supprimer un utilisateur.
+- [ ] Les admins peuvent lister, ajouter, mettre à jour et supprimer un utilisateur.
 
-Lors de la création ou de la mise à jour, le champ `password` n'est pas accessible, mais le champ `plainPassword` l'est.
+- [ ] Lors de la création ou de la mise à jour, le champ `password` n'est pas accessible, mais le champ `plainPassword` l'est.
 
-Un admin ne peut pas supprimer son propre compte.
+- [ ] Un admin ne peut pas supprimer son propre compte.
 
-Il doit forcément rester un admin.
+- [ ] Il doit forcément rester un admin.
 
 ### Crud Category
 
-Les admins peuvent lister, ajouter, mettre à jour et supprimer une catégorie.
+- [ ] Les admins peuvent lister, ajouter, mettre à jour et supprimer une catégorie.
 
-Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. La liste des catégories est
+- [ ] Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. La liste des catégories est
 paginée 30 par 30.
 
 ### Gestion des annonces
 
-Les admins peuvent lister, consulter, publier ou rejeter une annonce.
+- [ ] Les admins peuvent lister, consulter, publier ou rejeter une annonce.
 
-Les annonces ne peuvent pas être créées, modifiées ou supprimées depuis l'admin.
+- [ ] Les annonces ne peuvent pas être créées, modifiées ou supprimées depuis l'admin.
 
-Dans la liste, on doit connaitre le nombre de photos rattachées à l'annonce et dans la consultation, toutes les photos
+- [ ] Dans la liste, on doit connaitre le nombre de photos rattachées à l'annonce et dans la consultation, toutes les photos
 sont visibles. La liste des catégories est paginée 30 par 30.
 
 ## API
 
-Une API permet de récupérer et de créer des informations. Elle est basée sur le bundle Api Bundle
+- [ ] Une API permet de récupérer et de créer des informations. Elle est basée sur le bundle Api Bundle
 
 ### Category
 
-On peut récupérer la liste des catégories ainsi qu'accéder à une seule catégorie
+- [ ] On peut récupérer la liste des catégories ainsi qu'accéder à une seule catégorie
 
 ### Advert
 
-On peut créer / lister / accéder au détail des annonces.
+- [ ] On peut créer / lister / accéder au détail des annonces.
 
-Les annonces peuvent être triées par date de publication ou par prix (`ASC` et `DESC`).
+- [ ] Les annonces peuvent être triées par date de publication ou par prix (`ASC` et `DESC`).
 
-Les annonces peuvent être filtrées par catégorie ainsi que par prix (entre `min` et `max`)
+- [ ] Les annonces peuvent être filtrées par catégorie ainsi que par prix (entre `min` et `max`)
 
 ### Picture
 
-On peut créer / lister / accéder au détail des images. Les images sont créées via l'API avant les annonces (en envoyant
+- [ ] On peut créer / lister / accéder au détail des images. Les images sont créées via l'API avant les annonces (en envoyant
 le fichier) et l'annonce reçoit la liste des images téléchargées lors de la création (c'est à ce moment-là que le lien
 est fait entre annonce et image en base de données).
 
 ## Notification
 
-Lorsqu'une annonce est créée, une notification par mail est envoyée à tous les AdminUser.
+- [ ] Lorsqu'une annonce est créée, une notification par mail est envoyée à tous les AdminUser.
 
-La notification contient 3 boutons : un permettant d'envoyer sur la fiche de consultation dans l'admin, un second
+- [ ] La notification contient 3 boutons : un permettant d'envoyer sur la fiche de consultation dans l'admin, un second
 permettant de publier l'annonce et un troisième de rejeter l'annonce.
 
 ## Test
 
-L'API doit être intégralement testée. Vous pouvez voir comment tester une API dans
+- [ ] L'API doit être intégralement testée. Vous pouvez voir comment tester une API dans
 la [documentation d'API platform](https://api-platform.com/docs/core/testing/).
 
 ## L'accès mobile
 
-L'API sera consommé par une interface mobile utilisant la technologie de votre choix à partir du moment où elle a été
+- [ ] L'API sera consommé par une interface mobile utilisant la technologie de votre choix à partir du moment où elle a été
 étudiée en cours.
 
-Elle permet de lister et de filtrer les annonces publiées comme décrit dans la partie API des annonces.
+- [ ] Elle permet de lister et de filtrer les annonces publiées comme décrit dans la partie API des annonces.
 
-Elle offre également la possibilité de créer une annonce et les images rattachées.
+- [ ] Elle offre également la possibilité de créer une annonce et les images rattachées.
 
-La création d'une annonce se fait sans compte utilisateur. Elles ne peuvent pas être modifiées.
+- [ ] La création d'une annonce se fait sans compte utilisateur. Elles ne peuvent pas être modifiées.
 
 ## Commandes (bonus)
 
 Vous devez créer les commandes symfony suivantes :
 
-- Une commande permettant de supprimer toutes les annonces rejetées, créées il y a X jours (X étant un argument de la
-  commande)
-- Une commande permettant de supprimer toutes les annonces publiées il y a X jours (X étant un argument de la commande).
-  Ne pas se fier à la date de création mais bien à celle de publication.
-- Une commande permettant de supprimer toutes les images non rattachées à une annonce créées il y a plus de X jours (X
-  étant un argument de la commande)
+- [ ] Une commande permettant de supprimer toutes les annonces rejetées, créées il y a X jours (X étant un argument de la
+commande)
+- [ ] Une commande permettant de supprimer toutes les annonces publiées il y a X jours (X étant un argument de la commande).
+Ne pas se fier à la date de création mais bien à celle de publication.
+- [ ] Une commande permettant de supprimer toutes les images non rattachées à une annonce créées il y a plus de X jours (X
+étant un argument de la commande)
