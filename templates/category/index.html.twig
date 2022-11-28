@@ -21,7 +21,7 @@
                 <td>{{ category.getName() }}</td>
                 <td>
                     <a href=""><button>Modifier (non fonctionnel)</button></a>
-                    <a href=""><button>Supprimer (non fonctionnel)</button></a>
+                    <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}"><button>Supprimer</button></a>
                 </td>
             </tr>
         {% endfor %}

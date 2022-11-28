@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/admin/category', name: 'admin_category')]
+    #[Route('/admin/category', name: 'admin_category_index')]
     public function index(CategoryRepository $categoryRepository): Response
     {
         $listCategories = $categoryRepository->findAll();
@@ -31,12 +31,22 @@ class CategoryController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $categoryRepository->save($category, true);
-            return $this->redirectToRoute('admin_category');
+            return $this->redirectToRoute('admin_category_index');
         }
 
         return $this->render('category/add_edit.html.twig', [
             'ajout' => true,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/admin/category/delete/{id}', name: 'admin_category_delete')]
+    public function delete(CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $category = $categoryRepository->find($request->attributes->get('id'));
+        if($category)
+            $categoryRepository->remove($category, true);
+
+        return $this->redirectToRoute('admin_category_index');
     }
 }
