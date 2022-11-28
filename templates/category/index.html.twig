@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste annonces{% endblock %}
+
+{% block stylesheets %}
+{#    <link type="text/css" rel="stylesheet" href="../../content/style/style.css"/>#}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_category_add') }}"><button>Ajouter une cat&eacute;gorie</button></a>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Libell&eacute;</th>
+            <th>Actions</th>
+        </tr>
+        {% for category in listCategories %}
+            <tr>
+                <td>{{ category.getId() }}</td>
+                <td>{{ category.getName() }}</td>
+                <td>
+                    <a href=""><button>Modifier (non fonctionnel)</button></a>
+                    <a href=""><button>Supprimer (non fonctionnel)</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

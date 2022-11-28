@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if(ajout) %}
+        Ajout
+    {% else %}
+        Edition
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+{#    <link type="text/css" rel="stylesheet" href="../../content/style/style.css"/>#}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_category') }}"><button>Liste des annonces</button></a>
+
+    {{ form_start(form) }}
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        {{ form_rest(form) }}
+        <button type="submit">
+            {% if(ajout) %}
+                Ajouter
+            {% else %}
+                Enregistrer
+            {% endif %}
+        </button>
+    {{ form_end(form) }}
+{% endblock %}
