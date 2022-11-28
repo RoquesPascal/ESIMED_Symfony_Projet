@@ -95,7 +95,7 @@ connexion.
 
 ### Crud Category
 
-- [ ] Les admins peuvent lister, ajouter, mettre à jour et supprimer une catégorie.
+- [x] Les admins peuvent lister, ajouter, mettre à jour et supprimer une catégorie.
 
 - [ ] Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. La liste des catégories est
 paginée 30 par 30.
