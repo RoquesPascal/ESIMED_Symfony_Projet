@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\AdminUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * @extends ServiceEntityRepository<AdminUser>
@@ -14,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method AdminUser[]    findAll()
  * @method AdminUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdminUserRepository extends ServiceEntityRepository
+class AdminUserRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -37,6 +39,21 @@ class AdminUserRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function loadUserByIdentifier(string $identifier): ?AdminUser
+    {
+        $entityManager = $this->getEntityManager();
+
+        return $entityManager->createQuery(
+            'SELECT
+            FROM App\Entity\AdminUser
+            WHERE email = :query
+            OR password = :query'
+        ) ->setParameter('query',$identifier)->getOneOrNullResult();
     }
 
 //    /**
