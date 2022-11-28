@@ -20,7 +20,7 @@
                 <td>{{ category.getId() }}</td>
                 <td>{{ category.getName() }}</td>
                 <td>
-                    <a href=""><button>Modifier (non fonctionnel)</button></a>
+                    <a href="{{ path('admin_category_edit', { 'id': category.getId()}) }}"><button>Modifier</button></a>
                     <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}"><button>Supprimer</button></a>
                 </td>
             </tr>

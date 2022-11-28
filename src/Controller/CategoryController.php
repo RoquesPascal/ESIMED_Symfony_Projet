@@ -40,6 +40,25 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/category/edit/{id}', name: 'admin_category_edit')]
+    public function edit(CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $category = $categoryRepository->find($request->attributes->get('id'));
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $categoryRepository->save($category, true);
+            return $this->redirectToRoute('admin_category_index');
+        }
+
+        return $this->render('category/add_edit.html.twig', [
+            'ajout' => false,
+            'form' => $form->createView()
+        ]);
+    }
+
     #[Route('/admin/category/delete/{id}', name: 'admin_category_delete')]
     public function delete(CategoryRepository $categoryRepository, Request $request): Response
     {
