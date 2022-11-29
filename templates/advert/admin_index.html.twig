@@ -3,6 +3,7 @@
 {% block title %}Liste des annonces{% endblock %}
 
 {% block body %}
+    <a href="{{ path('index') }}"><button>Menu principal</button></a>
     <a href="{{ path('admin_advert_list_draft') }}"><button>Valider les nouvelles annonces (admin)</button></a>
     <a href="{{ path('admin_advert_list_published') }}"><button>Voir les annonces publi&eacute;es (admin)</button></a>
     <a href="{{ path('admin_advert_list_rejected') }}"><button>Valider les annonces rejet&eacute;es (admin)</button></a>

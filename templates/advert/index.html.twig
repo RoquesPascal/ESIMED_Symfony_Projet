@@ -4,6 +4,11 @@
 
 {% block body %}
     <a href="{{ path('add_advert') }}"><button>Ajouter une annonce</button></a>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('admin_index') }}"><button>Acc&eacute;der &agrave; la partie administration</button></a>
+    {% else %}
+        <a href="{{ path('admin_login') }}"><button>Se connecter en administrateur</button></a>
+    {% endif %}
 
     <table>
         <tr>

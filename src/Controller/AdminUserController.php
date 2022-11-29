@@ -42,18 +42,8 @@ class AdminUserController extends AbstractController
         ]);
     }
 
-    /**
-     * @throws Exception
-     */
-    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
-    public function logout()
-    {
-        // controller can be blank: it will never be called!
-        throw new Exception('Don\'t forget to activate logout in security.yaml');
-    }
-
     #[Route('/login', name: 'admin_login')]
-    public function login(AdminUserRepository $adminUserRepository, AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -64,5 +54,15 @@ class AdminUserController extends AbstractController
             'error'         => $error,
             'adminUser' => $adminUser,
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/logout', name: 'admin_logout', methods: ['GET'])]
+    public function logout()
+    {
+        // controller can be blank: it will never be called!
+        throw new Exception('Don\'t forget to activate logout in security.yaml');
     }
 }
