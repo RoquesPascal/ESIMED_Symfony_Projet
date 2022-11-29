@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if(ajout) %}
+        Ajout d'un administrateur
+    {% else %}
+        Modification d'un administrateur
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username) }}
+        <br/>
+
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        <br/>
+
+        {{ form_label(form.plainPassword) }}
+        {{ form_widget(form.plainPassword) }}
+
+        {{ form_rest(form) }}
+        <button type="submit">
+            {% if(ajout) %}
+                Ajouter
+            {% else %}
+                Enregistrer
+            {% endif %}
+        </button>
+    {{ form_end(form) }}
+{% endblock %}

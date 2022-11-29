@@ -16,34 +16,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminUserController extends AbstractController
 {
-    #[Route('/admin/user/add', name: 'admin_users_add')]
-    public function register(AdminUserRepository $adminUserRepository,
-                             Request $request,
-                             UserPasswordHasherInterface $passwordHasher
-    ): Response
-    {
-        $adminUser = new AdminUser();
-        $form = $this->createForm(AdminUserType::class, $adminUser);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $hashedPassword = $passwordHasher->hashPassword(
-                new AdminUserHash(),
-                $adminUser->getPassword()
-            );
-            $adminUser->setPassword($hashedPassword);
-
-            $adminUserRepository->save($adminUser, true);
-
-            return $this->redirectToRoute('admin_users');
-        }
-
-        return $this->render('admin_user/register.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
     #[Route('/login', name: 'admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -74,6 +46,64 @@ class AdminUserController extends AbstractController
         $listAdminUsers = $adminUserRepository->findAll();
         return $this->render('admin_user/list.html.twig', [
             'listAdminUsers' => $listAdminUsers,
+        ]);
+    }
+
+    #[Route('/admin/user/add', name: 'admin_users_add')]
+    public function admin_users_add(AdminUserRepository $adminUserRepository,
+                                    Request $request,
+                                    UserPasswordHasherInterface $passwordHasher
+    ): Response
+    {
+        $adminUser = new AdminUser();
+        $form = $this->createForm(AdminUserType::class, $adminUser);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $hashedPassword = $passwordHasher->hashPassword(
+                new AdminUserHash(),
+                $adminUser->getPlainPassword()
+            );
+            $adminUser->setPassword($hashedPassword);
+
+            $adminUserRepository->save($adminUser, true);
+
+            return $this->redirectToRoute('admin_users');
+        }
+
+        return $this->render('admin_user/add_edit.twig', [
+            'ajout' => false,
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/admin/user/edit/{id}', name: 'admin_users_edit')]
+    public function admin_users_edit(AdminUserRepository $adminUserRepository,
+                                     Request $request,
+                                     UserPasswordHasherInterface $passwordHasher
+    ): Response
+    {
+        $adminUser = $adminUserRepository->find($request->attributes->get('id'));
+        $form = $this->createForm(AdminUserType::class, $adminUser);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $hashedPassword = $passwordHasher->hashPassword(
+                new AdminUserHash(),
+                $adminUser->getPlainPassword()
+            );
+            $adminUser->setPassword($hashedPassword);
+
+            $adminUserRepository->save($adminUser, true);
+
+            return $this->redirectToRoute('admin_users');
+        }
+
+        return $this->render('admin_user/add_edit.twig', [
+            'ajout' => false,
+            'form' => $form->createView()
         ]);
     }
 
