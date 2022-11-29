@@ -44,4 +44,14 @@ class AdvertController extends AbstractController
             'listCategories' => $listCategories,
         ]);
     }
+
+    #[Route('/admin', name: 'admin_index')]
+    public function admin_index(AdvertRepository $advertRepository): Response
+    {
+        $listAdverts = $advertRepository->findAll();
+        return $this->render('advert/admin_index.html.twig', [
+            'controller_name' => 'AdvertController',
+            'listAdverts' => $listAdverts,
+        ]);
+    }
 }

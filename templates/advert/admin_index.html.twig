@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des annonces{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories</button></a>
+
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Cat&eacute;gorie</th>
+            <th>Auteur</th>
+            <th>Email</th>
+            <th>Price</th>
+            <th>Etat</th>
+            <th>Date de cr&eacute;ation</th>
+            <th>Date de publication</th>
+        </tr>
+        {% for advert in listAdverts %}
+            <tr>
+                <td>{{ advert.getTitle() }}</td>
+                <td>{{ advert.getContent() }}</td>
+                <td>{{ advert.getCategory().getName() }}</td>
+                <td>{{ advert.getAuthor() }}</td>
+                <td>{{ advert.getEmail() }}</td>
+                <td>{{ advert.getPrice() }}</td>
+                <td>{{ advert.getState() }}</td>
+                <td>{{ advert.getCreatedAt|date("Y-m-d H:i:s") }}</td>
+                <td>{{ advert.getPublishedAt is empty ? "" : advert.getPublishedAt|date("Y-m-d H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
