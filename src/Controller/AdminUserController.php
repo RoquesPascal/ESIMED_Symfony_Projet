@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminUserController extends AbstractController
 {
-    #[Route('/register', name: 'admin_register')]
+    #[Route('/admin/user/add', name: 'admin_users_add')]
     public function register(AdminUserRepository $adminUserRepository,
                              Request $request,
                              UserPasswordHasherInterface $passwordHasher
@@ -35,6 +35,8 @@ class AdminUserController extends AbstractController
             $adminUser->setPassword($hashedPassword);
 
             $adminUserRepository->save($adminUser, true);
+
+            return $this->redirectToRoute('admin_users');
         }
 
         return $this->render('admin_user/register.html.twig', [
@@ -64,5 +66,14 @@ class AdminUserController extends AbstractController
     {
         // controller can be blank: it will never be called!
         throw new Exception('Don\'t forget to activate logout in security.yaml');
+    }
+
+    #[Route('/admin/users', name: 'admin_users')]
+    public function admin_users(AdminUserRepository $adminUserRepository): Response
+    {
+        $listAdminUsers = $adminUserRepository->findAll();
+        return $this->render('admin_user/list.html.twig', [
+            'listAdminUsers' => $listAdminUsers,
+        ]);
     }
 }

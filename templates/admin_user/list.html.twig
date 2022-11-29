@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateur{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+    <a href="{{ path('admin_users_add') }}"><button>Ajouter un administrateur</button></a>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        {% for adminUser in listAdminUsers %}
+            <tr>
+                <td>{{ adminUser.getId() }}</td>
+                <td>{{ adminUser.getUsername() }}</td>
+                <td>{{ adminUser.getEmail() }}</td>
+                <td>
+                    <a href="{{ path('show', {'id': adminUser.getId()}) }}"><button>Modifier (non fonctionnel)</button></a>
+                    <a href="{{ path('show', {'id': adminUser.getId()}) }}"><button>supprimer (non fonctionnel)</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
