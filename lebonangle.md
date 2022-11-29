@@ -87,11 +87,11 @@ connexion.
 
 ### Crud AdminUser
 
-- [ ] Les admins peuvent lister, ajouter, mettre à jour et supprimer un utilisateur.
+- [x] Les admins peuvent lister, ajouter, mettre à jour et supprimer un utilisateur.
 
-- [ ] Lors de la création ou de la mise à jour, le champ `password` n'est pas accessible, mais le champ `plainPassword` l'est.
+- [x] Lors de la création ou de la mise à jour, le champ `password` n'est pas accessible, mais le champ `plainPassword` l'est.
 
-- [ ] Un admin ne peut pas supprimer son propre compte.
+- [x] Un admin ne peut pas supprimer son propre compte.
 
 - [ ] Il doit forcément rester un admin.
 
@@ -101,12 +101,11 @@ connexion.
 
 - [ ] Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. 
 
-- [ ] La liste des catégories est
-paginée 30 par 30.
+- [ ] La liste des catégories est paginée 30 par 30.
 
 ### Gestion des annonces
 
-- [ ] Les admins peuvent lister, consulter, publier ou rejeter une annonce.
+- [x] Les admins peuvent lister, consulter, publier ou rejeter une annonce.
 
 - [x] Les annonces ne peuvent pas être créées, modifiées ou supprimées depuis l'admin.
 
