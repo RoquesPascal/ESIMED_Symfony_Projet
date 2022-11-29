@@ -3,7 +3,8 @@
 {% block title %}Liste des annonces{% endblock %}
 
 {% block body %}
-    <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories</button></a>
+    <a href="{{ path('admin_advertvalidation') }}"><button>Valider les nouvelles annonces (admin)</button></a>
+    <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories (admin)</button></a>
 
     <table>
         <tr>
@@ -12,7 +13,7 @@
             <th>Cat&eacute;gorie</th>
             <th>Auteur</th>
             <th>Email</th>
-            <th>Price</th>
+            <th>Prix</th>
             <th>Etat</th>
             <th>Date de cr&eacute;ation</th>
             <th>Date de publication</th>

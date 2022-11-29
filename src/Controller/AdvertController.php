@@ -54,4 +54,14 @@ class AdvertController extends AbstractController
             'listAdverts' => $listAdverts,
         ]);
     }
+
+    #[Route('/admin/advertvalidation', name: 'admin_advertvalidation')]
+    public function admin_advertvalidation(AdvertRepository $advertRepository): Response
+    {
+        $listAdvertsDraft = $advertRepository->findBy(['state' => 'draft']);
+        return $this->render('advert/admin_advertvalidation.html.twig', [
+            'controller_name' => 'AdvertController',
+            'listAdvertsDraft' => $listAdvertsDraft,
+        ]);
+    }
 }
