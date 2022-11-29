@@ -20,7 +20,9 @@
                 <td>{{ adminUser.getEmail() }}</td>
                 <td>
                     <a href="{{ path('show', {'id': adminUser.getId()}) }}"><button>Modifier (non fonctionnel)</button></a>
-                    <a href="{{ path('show', {'id': adminUser.getId()}) }}"><button>supprimer (non fonctionnel)</button></a>
+                    {% if app.user.email != adminUser.email %}
+                        <a href="{{ path('admin_users_delete', {'id': adminUser.getId()}) }}"><button>supprimer</button></a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

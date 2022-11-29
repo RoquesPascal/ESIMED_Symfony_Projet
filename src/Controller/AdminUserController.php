@@ -76,4 +76,14 @@ class AdminUserController extends AbstractController
             'listAdminUsers' => $listAdminUsers,
         ]);
     }
+
+    #[Route('/admin/users/delete/{id}', name: 'admin_users_delete')]
+    public function admin_users_delete(AdminUserRepository $adminUserRepository, Request $request): Response
+    {
+        $adminUser = $adminUserRepository->find($request->attributes->get('id'));
+        if($adminUser)
+            $adminUserRepository->remove($adminUser, true);
+
+        return $this->redirectToRoute('admin_users');
+    }
 }
