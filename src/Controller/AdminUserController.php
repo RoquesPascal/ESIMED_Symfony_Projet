@@ -65,10 +65,4 @@ class AdminUserController extends AbstractController
             'adminUser' => $adminUser,
         ]);
     }
-
-    #[Route('/', name: 'index')]
-    public function index(AdminUserRepository $adminUserRepository, AuthenticationUtils $authenticationUtils): Response
-    {
-        echo 'AAAAAAAAAAAAAAAAAA';
-    }
 }

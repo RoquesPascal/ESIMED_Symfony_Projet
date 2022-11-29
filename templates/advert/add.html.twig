@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout{% endblock %}
+
+{% block stylesheets %}
+    {#    <link type="text/css" rel="stylesheet" href="../../content/style/style.css"/>#}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('index') }}"><button>Menu principal</button></a>
+
+    {{ form_start(form) }}
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        <br/>
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content) }}
+        <br/>
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category) }}
+        <br/>
+        {{ form_label(form.author) }}
+        {{ form_widget(form.author) }}
+        <br/>
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        <br/>
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price) }}
+        <br/>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        {{ form_rest(form) }}
+        <button type="submit">Ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}
