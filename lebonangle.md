@@ -65,22 +65,24 @@ sauvé dans password grace
 
 ## Renseignement de la date de création
 
-- [ ] Lorsqu'une annonce est créée, sa date de création est automatiquement renseignée. Il en est de même pour les images.
+- [x] Lorsqu'une annonce est créée, sa date de création est automatiquement renseignée.
+- [ ] Il en est de même pour les images.
 
 ## Workflow des annonces
 
-- [ ] Les annonces sont rattachées à un workflow. Lorsqu'elles sont créées, elles sont dans le statut `draft`. Les admins
+- [x] Les annonces sont rattachées à un workflow. Lorsqu'elles sont créées, elles sont dans le statut `draft`. Les admins
 peuvent les publier (status `published` ) ou les rejeter (status `rejected`). Une fois publiées, elles peuvent toujours
 être rejetées.
 
-- [ ] Quand une annonce passe du status `draft` à `published`, sa date de publication est automatiquement renseignée et un
-mail de notification est envoyé à l'utilisateur qui l'a créée.
+- [x] Quand une annonce passe du status `draft` à `published`, sa date de publication est automatiquement renseignée
+
+- [ ] Quand une annonce passe du status `draft` à `published`, un mail de notification est envoyé à l'utilisateur qui l'a créée.
 
 ## Admin
 
 - [x] Vous devez créer un admin sous Symfony. Il n'est pas possible d'utiliser un bundle d'admin (type EasyAdminBundle).
 
-- [ ] L'admin est accessible uniquement aux utilisateurs de type AdminUser qui s'authentifient grâce à un formulaire de
+- [x] L'admin est accessible uniquement aux utilisateurs de type AdminUser qui s'authentifient grâce à un formulaire de
 connexion.
 
 ### Crud AdminUser
@@ -97,14 +99,16 @@ connexion.
 
 - [x] Les admins peuvent lister, ajouter, mettre à jour et supprimer une catégorie.
 
-- [ ] Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. La liste des catégories est
+- [ ] Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. 
+
+- [ ] La liste des catégories est
 paginée 30 par 30.
 
 ### Gestion des annonces
 
 - [ ] Les admins peuvent lister, consulter, publier ou rejeter une annonce.
 
-- [ ] Les annonces ne peuvent pas être créées, modifiées ou supprimées depuis l'admin.
+- [x] Les annonces ne peuvent pas être créées, modifiées ou supprimées depuis l'admin.
 
 - [ ] Dans la liste, on doit connaitre le nombre de photos rattachées à l'annonce et dans la consultation, toutes les photos
 sont visibles. La liste des catégories est paginée 30 par 30.
