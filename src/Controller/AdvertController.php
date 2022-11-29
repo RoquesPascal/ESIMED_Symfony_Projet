@@ -48,6 +48,15 @@ class AdvertController extends AbstractController
         ]);
     }
 
+    #[Route('/show/{id}', name: 'show')]
+    public function show(AdvertRepository $advertRepository, Request $request): Response
+    {
+        $advert = $advertRepository->find($request->attributes->get('id'));
+        return $this->render('advert/show.html.twig', [
+            'advert' => $advert,
+        ]);
+    }
+
     #[Route('/admin', name: 'admin_index')]
     public function admin_index(AdvertRepository $advertRepository): Response
     {
@@ -76,7 +85,6 @@ class AdvertController extends AbstractController
             'advertSate' => 'published',
         ]);
     }
-
 
     #[Route('/admin/list/rejected', name: 'admin_advert_list_rejected')]
     public function admin_advert_list_rejected(AdvertRepository $advertRepository): Response

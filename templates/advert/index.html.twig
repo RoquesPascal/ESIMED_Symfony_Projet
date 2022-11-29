@@ -20,6 +20,7 @@
             <th>Prix</th>
             <th>Etat</th>
             <th>Date de publication</th>
+            <th>Actions</th>
         </tr>
         {% for advertPublished in listAdvertsPublished %}
             <tr>
@@ -31,6 +32,7 @@
                 <td>{{ advertPublished.getPrice() }}</td>
                 <td>{{ advertPublished.getState() }}</td>
                 <td>{{ advertPublished.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
+                <td><a href="{{ path('show', {'id': advertPublished.getId()}) }}"><button>Voir</button></a></td>
             </tr>
         {% endfor %}
     </table>

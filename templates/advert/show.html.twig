@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}D&eacute;tails de l'annonce{% endblock %}
+
+{% block body %}
+    <a href="{{ path('index') }}"><button>Liste des annonces</button></a>
+
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Cat&eacute;gorie</th>
+            <th>Auteur</th>
+            <th>Email</th>
+            <th>Prix</th>
+            <th>Date de publication</th>
+        </tr>
+        <tr>
+            <td>{{ advert.getTitle() }}</td>
+            <td>{{ advert.getContent() }}</td>
+            <td>{{ advert.getCategory().getName() }}</td>
+            <td>{{ advert.getAuthor() }}</td>
+            <td>{{ advert.getEmail() }}</td>
+            <td>{{ advert.getPrice() }}</td>
+            <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
+        </tr>
+    </table>
+{% endblock %}
