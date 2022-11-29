@@ -35,16 +35,15 @@
                 <td>{{ advert.getEmail() }}</td>
                 <td>{{ advert.getPrice() }}</td>
                 <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
-                {% if advertSate == 'draft' %}
-                    <td>
+                <td>
+                    <a href="{{ path('admin_show', {'id': advert.getId()}) }}"><button>Voir</button></a>
+                    {% if advertSate == 'draft' %}
                         <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advertSate}) }}"><button>Valider</button></a>
                         <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}"><button>Rejeter</button></a>
-                    </td>
-                {% elseif advertSate == 'published' %}
-                    <td>
+                    {% elseif advertSate == 'published' %}
                         <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}"><button>Rejeter</button></a>
-                    </td>
-                {% endif %}
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>

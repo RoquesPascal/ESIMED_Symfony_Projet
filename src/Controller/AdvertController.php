@@ -20,7 +20,6 @@ class AdvertController extends AbstractController
     {
         $listAdvertsPublished = $advertRepository->findBy(['state' => 'published']);
         return $this->render('advert/index.html.twig', [
-            'controller_name' => 'AdvertController',
             'listAdvertsPublished' => $listAdvertsPublished,
         ]);
     }
@@ -54,7 +53,6 @@ class AdvertController extends AbstractController
     {
         $listAdverts = $advertRepository->findAll();
         return $this->render('advert/admin_index.html.twig', [
-            'controller_name' => 'AdvertController',
             'listAdverts' => $listAdverts,
         ]);
     }
@@ -64,7 +62,6 @@ class AdvertController extends AbstractController
     {
         $listAdverts = $advertRepository->findBy(['state' => 'draft']);
         return $this->render('advert/admin_advert_list.html.twig', [
-            'controller_name' => 'AdvertController',
             'listAdverts' => $listAdverts,
             'advertSate' => 'draft',
         ]);
@@ -75,7 +72,6 @@ class AdvertController extends AbstractController
     {
         $listAdverts = $advertRepository->findBy(['state' => 'published']);
         return $this->render('advert/admin_advert_list.html.twig', [
-            'controller_name' => 'AdvertController',
             'listAdverts' => $listAdverts,
             'advertSate' => 'published',
         ]);
@@ -87,25 +83,32 @@ class AdvertController extends AbstractController
     {
         $listAdverts = $advertRepository->findBy(['state' => 'rejected']);
         return $this->render('advert/admin_advert_list.html.twig', [
-            'controller_name' => 'AdvertController',
             'listAdverts' => $listAdverts,
             'advertSate' => 'rejected',
         ]);
     }
 
+    #[Route('/admin/show/{id}', name: 'admin_show')]
+    public function admin_show(AdvertRepository $advertRepository, Request $request): Response
+    {
+        $advert = $advertRepository->find($request->attributes->get('id'));
+        return $this->render('advert/admin_show.html.twig', [
+            'advert' => $advert,
+        ]);
+    }
 
     #[Route('/admin/advertvalidation/validate/{id}&{view}', name: 'admin_advertvalidation_validate')]
     public function admin_advertvalidation_validate(AdvertRepository $advertRepository, Registry $registry, Request $request): Response
     {
         ManageWorkflow::Publish($request->attributes->get('id'), $advertRepository, $registry);
 
-        $view = $request->attributes->get('view');
-        if($view == 'draft')
-            return $this->redirectToRoute('admin_advert_list_draft');
-        else if($view == 'published')
-            return $this->redirectToRoute('admin_advert_list_published');
-        else
-            return $this->redirectToRoute('admin_advert_list_rejected');
+        return match($request->attributes->get('view'))
+        {
+            'draft'     => $this->redirectToRoute('admin_advert_list_draft'),
+            'published' => $this->redirectToRoute('admin_advert_list_published'),
+            'rejected'  => $this->redirectToRoute('admin_advert_list_rejected'),
+            default     => $this->redirectToRoute('admin_index'),
+        };
     }
 
     #[Route('/admin/advertvalidation/reject/{id}&{view}', name: 'admin_advertvalidation_reject')]
@@ -113,12 +116,12 @@ class AdvertController extends AbstractController
     {
         ManageWorkflow::Reject($request->attributes->get('id'), $advertRepository, $registry);
 
-        $view = $request->attributes->get('view');
-        if($view == 'draft')
-            return $this->redirectToRoute('admin_advert_list_draft');
-        else if($view == 'published')
-            return $this->redirectToRoute('admin_advert_list_published');
-        else
-            return $this->redirectToRoute('admin_advert_list_rejected');
+        return match($request->attributes->get('view'))
+        {
+            'draft'     => $this->redirectToRoute('admin_advert_list_draft'),
+            'published' => $this->redirectToRoute('admin_advert_list_published'),
+            'rejected'  => $this->redirectToRoute('admin_advert_list_rejected'),
+            default     => $this->redirectToRoute('admin_index'),
+        };
     }
 }

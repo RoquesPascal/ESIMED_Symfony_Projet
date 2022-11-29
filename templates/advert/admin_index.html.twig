@@ -6,7 +6,7 @@
     <a href="{{ path('index') }}"><button>Menu principal</button></a>
     <a href="{{ path('admin_advert_list_draft') }}"><button>Valider les nouvelles annonces (admin)</button></a>
     <a href="{{ path('admin_advert_list_published') }}"><button>Voir les annonces publi&eacute;es (admin)</button></a>
-    <a href="{{ path('admin_advert_list_rejected') }}"><button>Valider les annonces rejet&eacute;es (admin)</button></a>
+    <a href="{{ path('admin_advert_list_rejected') }}"><button>voir les annonces rejet&eacute;es (admin)</button></a>
     <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories (admin)</button></a>
 
     <table>
@@ -21,6 +21,7 @@
             <th>Etat</th>
             <th>Date de cr&eacute;ation</th>
             <th>Date de publication</th>
+            <th>Actions</th>
         </tr>
         {% for advert in listAdverts %}
             <tr>
@@ -34,6 +35,7 @@
                 <td>{{ advert.getState() }}</td>
                 <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
                 <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
+                <td><a href="{{ path('admin_show', {'id': advert.getId()}) }}"><button>Voir</button></a></td>
             </tr>
         {% endfor %}
     </table>
