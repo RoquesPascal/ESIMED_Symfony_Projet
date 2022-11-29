@@ -34,7 +34,7 @@
             <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
             {% if advert.getState() == 'draft' %}
                 <td>
-                    <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': 'index'}) }}"><button>Valider</button></a>
+                    <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': 'index'}) }}"><button>Publier</button></a>
                     <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': 'index'}) }}"><button>Rejeter</button></a>
                 </td>
             {% elseif advert.getState() == 'published' %}
