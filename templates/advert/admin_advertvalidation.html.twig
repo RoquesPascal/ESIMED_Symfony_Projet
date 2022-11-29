@@ -7,6 +7,7 @@
 
     <table>
         <tr>
+            <th>id</th>
             <th>Titre</th>
             <th>Contenu</th>
             <th>Cat&eacute;gorie</th>
@@ -18,6 +19,7 @@
         </tr>
         {% for advertDraft in listAdvertsDraft %}
             <tr>
+                <td>{{ advertDraft.getId() }}</td>
                 <td>{{ advertDraft.getTitle() }}</td>
                 <td>{{ advertDraft.getContent() }}</td>
                 <td>{{ advertDraft.getCategory().getName() }}</td>

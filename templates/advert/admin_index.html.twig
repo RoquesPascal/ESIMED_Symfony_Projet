@@ -8,6 +8,7 @@
 
     <table>
         <tr>
+            <th>id</th>
             <th>Titre</th>
             <th>Contenu</th>
             <th>Cat&eacute;gorie</th>
@@ -20,6 +21,7 @@
         </tr>
         {% for advert in listAdverts %}
             <tr>
+                <td>{{ advert.getId() }}</td>
                 <td>{{ advert.getTitle() }}</td>
                 <td>{{ advert.getContent() }}</td>
                 <td>{{ advert.getCategory().getName() }}</td>
