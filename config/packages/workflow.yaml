@@ -6,7 +6,7 @@ framework:
                 enabled: true
             marking_store:
                 type: 'method'
-                property: 'status'
+                property: 'state'
             supports:
                 - App\Entity\Advert
             initial_marking: draft

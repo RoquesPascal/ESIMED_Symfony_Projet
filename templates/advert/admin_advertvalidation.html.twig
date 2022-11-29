@@ -26,8 +26,8 @@
                 <td>{{ advertDraft.getPrice() }}</td>
                 <td>{{ advertDraft.getCreatedAt|date("Y-m-d H:i:s") }}</td>
                 <td>
-                    <a href=""><button>Valider (non focntionnel)</button></a>
-                    <a href=""><button>Rejeter (non focntionnel)</button></a>
+                    <a href="{{ path('admin_advertvalidation_validate', { 'id': advertDraft.getId()}) }}"><button>Valider</button></a>
+                    <a href="{{ path('admin_advertvalidation_reject', { 'id': advertDraft.getId()}) }}"><button>Rejeter</button></a>
                 </td>
             </tr>
         {% endfor %}

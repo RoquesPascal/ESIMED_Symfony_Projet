@@ -6,10 +6,12 @@ use App\Entity\Advert;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
+use App\Service\ManageWorkflow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Workflow\Registry;
 
 class AdvertController extends AbstractController
 {
@@ -63,5 +65,21 @@ class AdvertController extends AbstractController
             'controller_name' => 'AdvertController',
             'listAdvertsDraft' => $listAdvertsDraft,
         ]);
+    }
+
+    #[Route('/admin/advertvalidation/validate/{id}', name: 'admin_advertvalidation_validate')]
+    public function admin_advertvalidation_validate(AdvertRepository $advertRepository, Registry $registry, Request $request): Response
+    {
+        ManageWorkflow::Publish($request->attributes->get('id'), $advertRepository, $registry);
+
+        return $this->redirectToRoute('admin_advertvalidation');
+    }
+
+    #[Route('/admin/advertvalidation/reject/{id}', name: 'admin_advertvalidation_reject')]
+    public function admin_advertvalidation_reject(AdvertRepository $advertRepository, Registry $registry, Request $request): Response
+    {
+        ManageWorkflow::Reject($request->attributes->get('id'), $advertRepository, $registry);
+
+        return $this->redirectToRoute('admin_advertvalidation');
     }
 }
