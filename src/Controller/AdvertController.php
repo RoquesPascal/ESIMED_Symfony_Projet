@@ -57,29 +57,66 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/advertvalidation', name: 'admin_advertvalidation')]
-    public function admin_advertvalidation(AdvertRepository $advertRepository): Response
+    #[Route('/admin/list/draft', name: 'admin_advert_list_draft')]
+    public function admin_advert_list_draft(AdvertRepository $advertRepository): Response
     {
-        $listAdvertsDraft = $advertRepository->findBy(['state' => 'draft']);
-        return $this->render('advert/admin_advertvalidation.html.twig', [
+        $listAdverts = $advertRepository->findBy(['state' => 'draft']);
+        return $this->render('advert/admin_advert_list.html.twig', [
             'controller_name' => 'AdvertController',
-            'listAdvertsDraft' => $listAdvertsDraft,
+            'listAdverts' => $listAdverts,
+            'advertSate' => 'draft',
         ]);
     }
 
-    #[Route('/admin/advertvalidation/validate/{id}', name: 'admin_advertvalidation_validate')]
+    #[Route('/admin/list/published', name: 'admin_advert_list_published')]
+    public function admin_advert_list_published(AdvertRepository $advertRepository): Response
+    {
+        $listAdverts = $advertRepository->findBy(['state' => 'published']);
+        return $this->render('advert/admin_advert_list.html.twig', [
+            'controller_name' => 'AdvertController',
+            'listAdverts' => $listAdverts,
+            'advertSate' => 'published',
+        ]);
+    }
+
+
+    #[Route('/admin/list/rejected', name: 'admin_advert_list_rejected')]
+    public function admin_advert_list_rejected(AdvertRepository $advertRepository): Response
+    {
+        $listAdverts = $advertRepository->findBy(['state' => 'rejected']);
+        return $this->render('advert/admin_advert_list.html.twig', [
+            'controller_name' => 'AdvertController',
+            'listAdverts' => $listAdverts,
+            'advertSate' => 'rejected',
+        ]);
+    }
+
+
+    #[Route('/admin/advertvalidation/validate/{id}&{view}', name: 'admin_advertvalidation_validate')]
     public function admin_advertvalidation_validate(AdvertRepository $advertRepository, Registry $registry, Request $request): Response
     {
         ManageWorkflow::Publish($request->attributes->get('id'), $advertRepository, $registry);
 
-        return $this->redirectToRoute('admin_advertvalidation');
+        $view = $request->attributes->get('view');
+        if($view == 'draft')
+            return $this->redirectToRoute('admin_advert_list_draft');
+        else if($view == 'published')
+            return $this->redirectToRoute('admin_advert_list_published');
+        else
+            return $this->redirectToRoute('admin_advert_list_rejected');
     }
 
-    #[Route('/admin/advertvalidation/reject/{id}', name: 'admin_advertvalidation_reject')]
+    #[Route('/admin/advertvalidation/reject/{id}&{view}', name: 'admin_advertvalidation_reject')]
     public function admin_advertvalidation_reject(AdvertRepository $advertRepository, Registry $registry, Request $request): Response
     {
         ManageWorkflow::Reject($request->attributes->get('id'), $advertRepository, $registry);
 
-        return $this->redirectToRoute('admin_advertvalidation');
+        $view = $request->attributes->get('view');
+        if($view == 'draft')
+            return $this->redirectToRoute('admin_advert_list_draft');
+        else if($view == 'published')
+            return $this->redirectToRoute('admin_advert_list_published');
+        else
+            return $this->redirectToRoute('admin_advert_list_rejected');
     }
 }

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if advertSate == 'draft' %}
+        Liste des annonces &agrave; valider
+    {% elseif advertSate == 'published' %}
+        Liste des annonces publi&eacute;es
+    {% else %}
+        Liste des annonces rejet&eacute;es
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Cat&eacute;gorie</th>
+            <th>Auteur</th>
+            <th>Email</th>
+            <th>Prix</th>
+            <th>Date de cr&eacute;ation</th>
+            <th>Actions</th>
+        </tr>
+        {% for advert in listAdverts %}
+            <tr>
+                <td>{{ advert.getId() }}</td>
+                <td>{{ advert.getTitle() }}</td>
+                <td>{{ advert.getContent() }}</td>
+                <td>{{ advert.getCategory().getName() }}</td>
+                <td>{{ advert.getAuthor() }}</td>
+                <td>{{ advert.getEmail() }}</td>
+                <td>{{ advert.getPrice() }}</td>
+                <td>{{ advert.getCreatedAt|date("Y-m-d H:i:s") }}</td>
+                {% if advertSate == 'draft' %}
+                    <td>
+                        <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advertSate}) }}"><button>Valider</button></a>
+                        <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}"><button>Rejeter</button></a>
+                    </td>
+                {% elseif advertSate == 'published' %}
+                    <td>
+                        <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}"><button>Rejeter</button></a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
