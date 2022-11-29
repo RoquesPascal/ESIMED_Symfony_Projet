@@ -31,8 +31,8 @@
                 <td>{{ advert.getEmail() }}</td>
                 <td>{{ advert.getPrice() }}</td>
                 <td>{{ advert.getState() }}</td>
-                <td>{{ advert.getCreatedAt|date("Y-m-d H:i:s") }}</td>
-                <td>{{ advert.getPublishedAt is empty ? "" : advert.getPublishedAt|date("Y-m-d H:i:s") }}</td>
+                <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
+                <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
             </tr>
         {% endfor %}
     </table>

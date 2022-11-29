@@ -16,10 +16,12 @@ use Symfony\Component\Workflow\Registry;
 class AdvertController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(AdvertRepository $advertRepository): Response
     {
+        $listAdvertsPublished = $advertRepository->findBy(['state' => 'published']);
         return $this->render('advert/index.html.twig', [
             'controller_name' => 'AdvertController',
+            'listAdvertsPublished' => $listAdvertsPublished,
         ]);
     }
 

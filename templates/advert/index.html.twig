@@ -4,4 +4,29 @@
 
 {% block body %}
     <a href="{{ path('add_advert') }}"><button>Ajouter une annonce</button></a>
+
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Cat&eacute;gorie</th>
+            <th>Auteur</th>
+            <th>Email</th>
+            <th>Prix</th>
+            <th>Etat</th>
+            <th>Date de publication</th>
+        </tr>
+        {% for advertPublished in listAdvertsPublished %}
+            <tr>
+                <td>{{ advertPublished.getTitle() }}</td>
+                <td>{{ advertPublished.getContent() }}</td>
+                <td>{{ advertPublished.getCategory().getName() }}</td>
+                <td>{{ advertPublished.getAuthor() }}</td>
+                <td>{{ advertPublished.getEmail() }}</td>
+                <td>{{ advertPublished.getPrice() }}</td>
+                <td>{{ advertPublished.getState() }}</td>
+                <td>{{ advertPublished.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

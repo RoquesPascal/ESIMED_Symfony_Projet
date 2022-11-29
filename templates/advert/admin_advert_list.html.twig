@@ -34,7 +34,7 @@
                 <td>{{ advert.getAuthor() }}</td>
                 <td>{{ advert.getEmail() }}</td>
                 <td>{{ advert.getPrice() }}</td>
-                <td>{{ advert.getCreatedAt|date("Y-m-d H:i:s") }}</td>
+                <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
                 {% if advertSate == 'draft' %}
                     <td>
                         <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advertSate}) }}"><button>Valider</button></a>
