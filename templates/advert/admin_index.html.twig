@@ -10,6 +10,16 @@
     <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories (admin)</button></a>
     <a href="{{ path('admin_users') }}"><button>Voir les administrateurs (admin)</button></a>
 
+    <form action="{{ path('admin_index') }}" method="post">
+        <select name="category">
+            <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
+            {% for category in listCategoriesWithAdverts %}
+                <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Rechercher par cat&eacute;gorie</button>
+    </form>
+
     <table>
         <tr>
             <th>id</th>

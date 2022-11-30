@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des annonces{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+
+    {% if(listAdverts != null) %}
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Cat&eacute;gorie</th>
+                <th>Auteur</th>
+                <th>Email</th>
+                <th>Prix</th>
+                <th>Etat</th>
+                <th>Date de cr&eacute;ation</th>
+                <th>Date de publication</th>
+                <th>Actions</th>
+            </tr>
+            {% for advert in listAdverts %}
+                <tr>
+                    <td>{{ advert.getId() }}</td>
+                    <td>{{ advert.getTitle() }}</td>
+                    <td>{{ advert.getContent() }}</td>
+                    <td>{{ advert.getCategory().getName() }}</td>
+                    <td>{{ advert.getAuthor() }}</td>
+                    <td>{{ advert.getEmail() }}</td>
+                    <td>{{ advert.getPrice() }}</td>
+                    <td>{{ advert.getState() }}</td>
+                    <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
+                    <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
+                    <td>
+                        <a href="{{ path('admin_show', {'id': advert.getId()}) }}"><button>Voir</button></a>
+                        {% if advert.getState() == 'draft' %}
+                            <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advert.getCategory().getId()}) }}"><button>Publier</button></a>
+                            <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advert.getCategory().getId()}) }}"><button>Rejeter</button></a>
+                        {% elseif advert.getState() == 'published' %}
+                            <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advert.getCategory().getId()}) }}"><button>Rejeter</button></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

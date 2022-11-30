@@ -59,6 +59,16 @@ class CategoryRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function getCategoriesWithAdverts(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->join(Advert::class, 'a', Join::WITH, 'c.id = a.category')
+            ->groupBy('c.id')
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getCategoriesWithPublishedAdverts(): array
     {
         return $this->createQueryBuilder('c')

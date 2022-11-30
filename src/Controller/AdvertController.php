@@ -16,7 +16,9 @@ use Symfony\Component\Workflow\Registry;
 class AdvertController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(AdvertRepository $advertRepository, CategoryRepository $categoryRepository, Request $request): Response
+    public function index(AdvertRepository $advertRepository,
+                          CategoryRepository $categoryRepository,
+                          Request $request): Response
     {
         $idCategory = $request->request->get('category');
         if($idCategory)
@@ -31,7 +33,7 @@ class AdvertController extends AbstractController
     }
 
     #[Route('/listbycategories/{id}', name: 'listbycategories')]
-    public function listbycategories(AdvertRepository $advertRepository, CategoryRepository $categoryRepository, Request $request): Response
+    public function listbycategories(AdvertRepository $advertRepository, Request $request): Response
     {
         $listAdverts = $advertRepository->findBy(['category' => $request->attributes->get('id'), 'state' => 'published']);
 
@@ -41,7 +43,10 @@ class AdvertController extends AbstractController
     }
 
     #[Route('/add', name: 'add_advert')]
-    public function add(AdvertRepository $advertRepository, CategoryRepository $categoryRepository, Request $request): Response
+    public function add(AdvertRepository $advertRepository,
+                        CategoryRepository $categoryRepository,
+                        Request $request
+    ): Response
     {
         $advert = new Advert();
         $form = $this->createForm(AdvertType::class, $advert);
@@ -74,10 +79,29 @@ class AdvertController extends AbstractController
     }
 
     #[Route('/admin', name: 'admin_index')]
-    public function admin_index(AdvertRepository $advertRepository): Response
+    public function admin_index(AdvertRepository $advertRepository,
+                                CategoryRepository $categoryRepository,
+                                Request $request
+    ): Response
     {
+        $idCategory = $request->request->get('category');
+        if($idCategory)
+            return $this->redirectToRoute('admin_listbycategories', ['id' => $idCategory]);
+
         $listAdverts = $advertRepository->findAll();
+        $listCategoriesWithAdverts = $categoryRepository->getCategoriesWithAdverts();
         return $this->render('advert/admin_index.html.twig', [
+            'listAdverts' => $listAdverts,
+            'listCategoriesWithAdverts' => $listCategoriesWithAdverts,
+        ]);
+    }
+
+    #[Route('/admin/listbycategories/{id}', name: 'admin_listbycategories')]
+    public function admin_listbycategories(AdvertRepository $advertRepository, Request $request): Response
+    {
+        $listAdverts = $advertRepository->findBy(['category' => $request->attributes->get('id')]);
+
+        return $this->render('advert/admin_list_by_category.html.twig', [
             'listAdverts' => $listAdverts,
         ]);
     }
@@ -128,10 +152,11 @@ class AdvertController extends AbstractController
 
         return match($request->attributes->get('view'))
         {
+            'index'     => $this->redirectToRoute('admin_index'),
             'draft'     => $this->redirectToRoute('admin_advert_list_draft'),
             'published' => $this->redirectToRoute('admin_advert_list_published'),
             'rejected'  => $this->redirectToRoute('admin_advert_list_rejected'),
-            default     => $this->redirectToRoute('admin_index'),
+            default     => $this->redirectToRoute('admin_listbycategories', ['id' => $request->attributes->get('view')]),
         };
     }
 
@@ -142,10 +167,11 @@ class AdvertController extends AbstractController
 
         return match($request->attributes->get('view'))
         {
+            'index'     => $this->redirectToRoute('admin_index'),
             'draft'     => $this->redirectToRoute('admin_advert_list_draft'),
             'published' => $this->redirectToRoute('admin_advert_list_published'),
             'rejected'  => $this->redirectToRoute('admin_advert_list_rejected'),
-            default     => $this->redirectToRoute('admin_index'),
+            default     => $this->redirectToRoute('admin_listbycategories', ['id' => $request->attributes->get('view')]),
         };
     }
 }
