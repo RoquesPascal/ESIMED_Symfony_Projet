@@ -22,7 +22,9 @@
                 <td>{{ category.getName() }}</td>
                 <td>
                     <a href="{{ path('admin_category_edit', { 'id': category.getId()}) }}"><button>Modifier</button></a>
-                    <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}"><button>Supprimer</button></a>
+                    {% if(category.getId() not in listCategoriesDeletable) %}
+                        <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}"><button>Supprimer</button></a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

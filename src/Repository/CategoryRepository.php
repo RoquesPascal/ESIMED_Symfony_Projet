@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Advert;
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +39,24 @@ class CategoryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getCategoriesDeletable(): array
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id')
+            ->join(Advert::class, 'a', Join::WITH, 'c.id = a.category')
+            ->groupBy('c.id')
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        $result = [];
+        for($i = 0 ; $i < count($query) ; $i++)
+        {
+            $result[$i] = $query[$i]['id'];
+        }
+        return $result;
     }
 
 //    /**

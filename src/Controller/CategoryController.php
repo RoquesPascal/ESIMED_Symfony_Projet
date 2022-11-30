@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     #[Route('/admin/category', name: 'admin_category_index')]
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(CategoryRepository $categoryRepository, AdvertRepository $advertRepository): Response
     {
         $listCategories = $categoryRepository->findAll();
+        $listCategoriesDeletable = $categoryRepository->getCategoriesDeletable();
         return $this->render('category/index.html.twig', [
             'listCategories' => $listCategories,
+            'listCategoriesDeletable' => $listCategoriesDeletable,
         ]);
     }
 
