@@ -7,6 +7,8 @@ use App\Form\AdminUserType;
 use App\Repository\AdminUserRepository;
 use App\Security\AdminUserHash;
 use Exception;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +18,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminUserController extends AbstractController
 {
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     #[Route('/login', name: 'admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED'))
+            return $this->redirectToRoute('admin_index');
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         $adminUser = $this->getUser();
@@ -73,7 +83,7 @@ class AdminUserController extends AbstractController
         }
 
         return $this->render('admin_user/add_edit.twig', [
-            'ajout' => false,
+            'ajout' => true,
             'form' => $form->createView()
         ]);
     }

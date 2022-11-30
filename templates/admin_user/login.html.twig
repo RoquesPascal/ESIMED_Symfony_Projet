@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Se connecter{% endblock %}
+
 {% block body %}
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -7,7 +9,7 @@
 
     <form action="{{ path('admin_login') }}" method="post">
         <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}">
+        <input type="text" id="username" name="_username" value="">
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="_password">
