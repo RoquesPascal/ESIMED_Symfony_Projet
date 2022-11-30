@@ -16,11 +16,27 @@ use Symfony\Component\Workflow\Registry;
 class AdvertController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(AdvertRepository $advertRepository): Response
+    public function index(AdvertRepository $advertRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
+        $idCategory = $request->request->get('category');
+        if($idCategory)
+            return $this->redirectToRoute('listbycategories', ['id' => $idCategory]);
+
         $listAdvertsPublished = $advertRepository->findBy(['state' => 'published']);
+        $listCategoriesWithPublishedAdverts = $categoryRepository->getCategoriesWithPublishedAdverts();
         return $this->render('advert/index.html.twig', [
             'listAdvertsPublished' => $listAdvertsPublished,
+            'listCategoriesWithPublishedAdverts' => $listCategoriesWithPublishedAdverts,
+        ]);
+    }
+
+    #[Route('/listbycategories/{id}', name: 'listbycategories')]
+    public function listbycategories(AdvertRepository $advertRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $listAdverts = $advertRepository->findBy(['category' => $request->attributes->get('id'), 'state' => 'published']);
+
+        return $this->render('advert/list_by_category.html.twig', [
+            'listAdverts' => $listAdverts,
         ]);
     }
 

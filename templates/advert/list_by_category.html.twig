@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des annonces{% endblock %}
+
+{% block body %}
+    <a href="{{ path('index') }}"><button>Menu principal</button></a>
+
+    {% if(listAdverts != null) %}
+        <table>
+            <tr>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Cat&eacute;gorie</th>
+                <th>Auteur</th>
+                <th>Email</th>
+                <th>Prix</th>
+                <th>Etat</th>
+                <th>Date de publication</th>
+                <th>Actions</th>
+            </tr>
+            {% for advert in listAdverts %}
+                <tr>
+                    <td>{{ advert.getTitle() }}</td>
+                    <td>{{ advert.getContent() }}</td>
+                    <td>{{ advert.getCategory().getName() }}</td>
+                    <td>{{ advert.getAuthor() }}</td>
+                    <td>{{ advert.getEmail() }}</td>
+                    <td>{{ advert.getPrice() }}</td>
+                    <td>{{ advert.getState() }}</td>
+                    <td>{{ advert.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
+                    <td><a href="{{ path('show', {'id': advert.getId()}) }}"><button>Voir</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

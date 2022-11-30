@@ -18,6 +18,7 @@ class CategoryController extends AbstractController
     {
         $listCategories = $categoryRepository->findAll();
         $listCategoriesDeletable = $categoryRepository->getCategoriesDeletable();
+
         return $this->render('category/index.html.twig', [
             'listCategories' => $listCategories,
             'listCategoriesDeletable' => $listCategoriesDeletable,
