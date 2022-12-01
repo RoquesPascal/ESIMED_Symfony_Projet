@@ -5,7 +5,7 @@
 {% block body %}
     <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
 
-    {% if(listAdverts != null) %}
+    {% if(pager.currentPageResults != null) %}
         <table>
             <tr>
                 <th>id</th>
@@ -20,7 +20,7 @@
                 <th>Date de publication</th>
                 <th>Actions</th>
             </tr>
-            {% for advert in listAdverts %}
+            {% for advert in pager.currentPageResults %}
                 <tr>
                     <td>{{ advert.getId() }}</td>
                     <td>{{ advert.getTitle() }}</td>
@@ -44,5 +44,8 @@
                 </tr>
             {% endfor %}
         </table>
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager) }}
+        {% endif %}
     {% endif %}
 {% endblock %}

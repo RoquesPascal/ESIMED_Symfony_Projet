@@ -16,7 +16,7 @@
             <th>Libell&eacute;</th>
             <th>Actions</th>
         </tr>
-        {% for category in listCategories %}
+        {% for category in pager.currentPageResults %}
             <tr>
                 <td>{{ category.getId() }}</td>
                 <td>{{ category.getName() }}</td>
@@ -29,4 +29,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% if pager.haveToPaginate %}
+        {{ pagerfanta(pager) }}
+    {% endif %}
 {% endblock %}

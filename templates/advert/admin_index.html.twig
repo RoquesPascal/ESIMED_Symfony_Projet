@@ -34,7 +34,7 @@
             <th>Date de publication</th>
             <th>Actions</th>
         </tr>
-        {% for advert in listAdverts %}
+        {% for advert in pager.currentPageResults  %}
             <tr>
                 <td>{{ advert.getId() }}</td>
                 <td>{{ advert.getTitle() }}</td>
@@ -50,4 +50,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% if pager.haveToPaginate %}
+        {{ pagerfanta(pager) }}
+    {% endif %}
 {% endblock %}

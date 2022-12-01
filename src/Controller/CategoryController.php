@@ -6,6 +6,8 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     #[Route('/admin/category', name: 'admin_category_index')]
-    public function index(CategoryRepository $categoryRepository, AdvertRepository $advertRepository): Response
+    public function index(CategoryRepository $categoryRepository,
+                          AdvertRepository $advertRepository,
+                          Request $request
+    ): Response
     {
-        $listCategories = $categoryRepository->findAll();
+        $queryBuilder = $categoryRepository
+            ->createQueryBuilder('c')
+            ->addOrderBy('c.name', 'ASC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
+
         $listCategoriesDeletable = $categoryRepository->getCategoriesDeletable();
 
         return $this->render('category/index.html.twig', [
-            'listCategories' => $listCategories,
+            'pager' => $pager,
             'listCategoriesDeletable' => $listCategoriesDeletable,
         ]);
     }

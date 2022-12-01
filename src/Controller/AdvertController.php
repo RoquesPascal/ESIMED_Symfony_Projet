@@ -107,10 +107,16 @@ class AdvertController extends AbstractController
         if($idCategory)
             return $this->redirectToRoute('admin_listbycategories', ['id' => $idCategory]);
 
-        $listAdverts = $advertRepository->findAll();
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->addOrderBy('a.createdAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
+
         $listCategoriesWithAdverts = $categoryRepository->getCategoriesWithAdverts();
         return $this->render('advert/admin_index.html.twig', [
-            'listAdverts' => $listAdverts,
+            'pager' => $pager,
             'listCategoriesWithAdverts' => $listCategoriesWithAdverts,
         ]);
     }
@@ -118,39 +124,70 @@ class AdvertController extends AbstractController
     #[Route('/admin/listbycategories/{id}', name: 'admin_listbycategories')]
     public function admin_listbycategories(AdvertRepository $advertRepository, Request $request): Response
     {
-        $listAdverts = $advertRepository->findBy(['category' => $request->attributes->get('id')]);
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->where('a.category = :idCategory')
+            ->setParameter('idCategory', $request->attributes->get('id'))
+            ->addOrderBy('a.createdAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
 
         return $this->render('advert/admin_list_by_category.html.twig', [
-            'listAdverts' => $listAdverts,
+            'pager' => $pager,
         ]);
     }
 
     #[Route('/admin/list/draft', name: 'admin_advert_list_draft')]
-    public function admin_advert_list_draft(AdvertRepository $advertRepository): Response
+    public function admin_advert_list_draft(AdvertRepository $advertRepository, Request $request): Response
     {
-        $listAdverts = $advertRepository->findBy(['state' => 'draft']);
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->where('a.state = :state')
+            ->setParameter('state', 'draft')
+            ->addOrderBy('a.createdAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
+
         return $this->render('advert/admin_advert_list.html.twig', [
-            'listAdverts' => $listAdverts,
+            'pager' => $pager,
             'advertSate' => 'draft',
         ]);
     }
 
     #[Route('/admin/list/published', name: 'admin_advert_list_published')]
-    public function admin_advert_list_published(AdvertRepository $advertRepository): Response
+    public function admin_advert_list_published(AdvertRepository $advertRepository, Request $request): Response
     {
-        $listAdverts = $advertRepository->findBy(['state' => 'published']);
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->where('a.state = :state')
+            ->setParameter('state', 'published')
+            ->addOrderBy('a.createdAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
+
         return $this->render('advert/admin_advert_list.html.twig', [
-            'listAdverts' => $listAdverts,
+            'pager' => $pager,
             'advertSate' => 'published',
         ]);
     }
 
     #[Route('/admin/list/rejected', name: 'admin_advert_list_rejected')]
-    public function admin_advert_list_rejected(AdvertRepository $advertRepository): Response
+    public function admin_advert_list_rejected(AdvertRepository $advertRepository, Request $request): Response
     {
-        $listAdverts = $advertRepository->findBy(['state' => 'rejected']);
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->where('a.state = :state')
+            ->setParameter('state', 'rejected')
+            ->addOrderBy('a.createdAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
+
         return $this->render('advert/admin_advert_list.html.twig', [
-            'listAdverts' => $listAdverts,
+            'pager' => $pager,
             'advertSate' => 'rejected',
         ]);
     }

@@ -101,7 +101,7 @@ connexion.
 
 - [x] Si une catégorie est rattachée à au moins une annonce, elle ne peut pas être supprimée. 
 
-- [ ] La liste des catégories est paginée 30 par 30.
+- [x] La liste des catégories est paginée 30 par 30.
 
 ### Gestion des annonces
 
@@ -112,7 +112,7 @@ connexion.
 - [ ] Dans la liste, on doit connaitre le nombre de photos rattachées à l'annonce et dans la consultation, toutes les photos
 sont visibles.
 
-- [ ] La liste des catégories est paginée 30 par 30.
+- [x] La liste des annonces est paginée 30 par 30.
 
 ## API
 
