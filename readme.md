@@ -110,7 +110,9 @@ connexion.
 - [x] Les annonces ne peuvent pas être créées, modifiées ou supprimées depuis l'admin.
 
 - [ ] Dans la liste, on doit connaitre le nombre de photos rattachées à l'annonce et dans la consultation, toutes les photos
-sont visibles. La liste des catégories est paginée 30 par 30.
+sont visibles.
+
+- [ ] La liste des catégories est paginée 30 par 30.
 
 ## API
 

@@ -7,6 +7,8 @@ use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\Service\ManageWorkflow;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +26,18 @@ class AdvertController extends AbstractController
         if($idCategory)
             return $this->redirectToRoute('listbycategories', ['id' => $idCategory]);
 
-        $listAdvertsPublished = $advertRepository->findBy(['state' => 'published']);
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->where('a.state = :state')
+            ->setParameter('state', 'published')
+            ->addOrderBy('a.publishedAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
+
         $listCategoriesWithPublishedAdverts = $categoryRepository->getCategoriesWithPublishedAdverts();
         return $this->render('advert/index.html.twig', [
-            'listAdvertsPublished' => $listAdvertsPublished,
+            'pager' => $pager,
             'listCategoriesWithPublishedAdverts' => $listCategoriesWithPublishedAdverts,
         ]);
     }
@@ -35,10 +45,19 @@ class AdvertController extends AbstractController
     #[Route('/listbycategories/{id}', name: 'listbycategories')]
     public function listbycategories(AdvertRepository $advertRepository, Request $request): Response
     {
-        $listAdverts = $advertRepository->findBy(['category' => $request->attributes->get('id'), 'state' => 'published']);
+        $queryBuilder = $advertRepository
+            ->createQueryBuilder('a')
+            ->where('a.state = :state')
+            ->andWhere('a.category = :idCategory')
+            ->setParameter('state', 'published')
+            ->setParameter('idCategory', $request->attributes->get('id'))
+            ->addOrderBy('a.publishedAt', 'DESC');
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(30);
+        $pager->setCurrentPage($request->get('page', 1));
 
         return $this->render('advert/list_by_category.html.twig', [
-            'listAdverts' => $listAdverts,
+            'pager' => $pager,
         ]);
     }
 

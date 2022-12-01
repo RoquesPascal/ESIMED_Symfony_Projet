@@ -5,7 +5,7 @@
 {% block body %}
     <a href="{{ path('index') }}"><button>Menu principal</button></a>
 
-    {% if(listAdverts != null) %}
+    {% if(pager.currentPageResults != null) %}
         <table>
             <tr>
                 <th>Titre</th>
@@ -18,7 +18,7 @@
                 <th>Date de publication</th>
                 <th>Actions</th>
             </tr>
-            {% for advert in listAdverts %}
+            {% for advert in pager.currentPageResults  %}
                 <tr>
                     <td>{{ advert.getTitle() }}</td>
                     <td>{{ advert.getContent() }}</td>
@@ -32,5 +32,8 @@
                 </tr>
             {% endfor %}
         </table>
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager) }}
+        {% endif %}
     {% endif %}
 {% endblock %}
