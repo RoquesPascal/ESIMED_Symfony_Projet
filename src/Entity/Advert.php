@@ -40,9 +40,6 @@ class Advert
     #[Assert\Email]
     private ?string $email = null;
 
-    #[ORM\ManyToOne]
-    private ?Category $category = null;
-
     #[ORM\Column(length: 1000000.00)]
     #[Assert\GreaterThanOrEqual(value: 1.00)]
     private ?float $price = null;
@@ -55,6 +52,10 @@ class Advert
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $publishedAt = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -109,18 +110,6 @@ class Advert
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -165,6 +154,18 @@ class Advert
     public function setPublishedAt(?\DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
