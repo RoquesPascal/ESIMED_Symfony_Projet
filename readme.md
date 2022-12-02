@@ -124,7 +124,11 @@ sont visibles.
 
 ### Advert
 
-- [ ] On peut créer / lister / accéder au détail des annonces.
+- [x] On peut créer  des annonces.
+
+- [x] On peut lister les annonces.
+
+- [x] On peut  accéder au détail des annonces.
 
 - [ ] Les annonces peuvent être triées par date de publication ou par prix (`ASC` et `DESC`).
 

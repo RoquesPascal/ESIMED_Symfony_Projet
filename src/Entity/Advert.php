@@ -2,12 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AdvertRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints AS Assert;
 
 #[ORM\Entity(repositoryClass: AdvertRepository::class)]
+#[ApiResource(
+    order: ['price' => 'ASC']),
+    ApiFilter(SearchFilter::class, properties: ['category' => 'exact'])
+]
 class Advert
 {
     #[ORM\Id]
@@ -30,6 +38,10 @@ class Advert
     private ?string $email = null;
 
     #[ORM\ManyToOne]
+    #[ApiProperty(
+        readableLink: true,
+        writableLink: true
+    )]
     private ?Category $category = null;
 
     #[ORM\Column(length: 1000000.00)]
