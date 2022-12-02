@@ -132,9 +132,9 @@ sont visibles.
 
 - [x] On peut  accéder au détail des annonces.
 
-- [ ] Les annonces peuvent être triées par date de publication ou par prix (`ASC` et `DESC`).
+- [x] Les annonces peuvent être triées par date de publication ou par prix (`ASC` et `DESC`).
 
-- [ ] Les annonces peuvent être filtrées par catégorie ainsi que par prix (entre `min` et `max`)
+- [x] Les annonces peuvent être filtrées par catégorie ainsi que par prix (entre `min` et `max`)
 
 ### Picture
 
@@ -153,17 +153,6 @@ permettant de publier l'annonce et un troisième de rejeter l'annonce.
 
 - [ ] L'API doit être intégralement testée. Vous pouvez voir comment tester une API dans
 la [documentation d'API platform](https://api-platform.com/docs/core/testing/).
-
-## L'accès mobile
-
-- [ ] L'API sera consommé par une interface mobile utilisant la technologie de votre choix à partir du moment où elle a été
-étudiée en cours.
-
-- [ ] Elle permet de lister et de filtrer les annonces publiées comme décrit dans la partie API des annonces.
-
-- [ ] Elle offre également la possibilité de créer une annonce et les images rattachées.
-
-- [ ] La création d'une annonce se fait sans compte utilisateur. Elles ne peuvent pas être modifiées.
 
 ## Commandes (bonus)
 

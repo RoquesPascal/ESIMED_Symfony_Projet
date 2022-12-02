@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
@@ -13,8 +15,10 @@ use Symfony\Component\Validator\Constraints AS Assert;
 
 #[ORM\Entity(repositoryClass: AdvertRepository::class)]
 #[ApiResource(
-    order: ['price' => 'ASC']),
-    ApiFilter(SearchFilter::class, properties: ['category' => 'exact'])
+    ),
+    ApiFilter(SearchFilter::class, properties: ['category' => 'exact']),
+    ApiFilter(RangeFilter::class, properties:['price']),
+    ApiFilter(OrderFilter::class, properties:['price', 'publishedAt'])
 ]
 class Advert
 {
