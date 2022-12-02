@@ -42,10 +42,6 @@ class Advert
     private ?string $email = null;
 
     #[ORM\ManyToOne]
-    #[ApiProperty(
-        readableLink: true,
-        writableLink: true
-    )]
     private ?Category $category = null;
 
     #[ORM\Column(length: 1000000.00)]
