@@ -116,11 +116,13 @@ sont visibles.
 
 ## API
 
-- [ ] Une API permet de récupérer et de créer des informations. Elle est basée sur le bundle Api Bundle
+- [x] Une API permet de récupérer et de créer des informations. Elle est basée sur le bundle Api Bundle
 
 ### Category
 
-- [ ] On peut récupérer la liste des catégories ainsi qu'accéder à une seule catégorie
+- [x] On peut récupérer la liste des catégories
+
+- [x] On peut accéder à une seule catégorie
 
 ### Advert
 
