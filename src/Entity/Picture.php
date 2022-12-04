@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
@@ -22,6 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     operations: [
         new Get(),
         new GetCollection(),
+        new Delete(),
         new Post(
             controller: PictureController::class,
             openapiContext: [
@@ -46,7 +47,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         )
     ],
     normalizationContext: ['groups' => ['media_object:read']]
-
 )]
 class Picture
 {
@@ -59,7 +59,6 @@ class Picture
     private ?File $file = null;
 
     #[ORM\Column(length: 255)]
-    //#[ApiProperty(types: ['https://schema.org/contentUrl'])]
     private ?string $path = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
