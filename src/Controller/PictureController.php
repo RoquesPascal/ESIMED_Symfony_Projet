@@ -21,7 +21,6 @@ class PictureController extends AbstractController
 
         $picture = new Picture();
         $picture->setFile($uploadFile);
-        $picture->setPath('bonjour');
         $picture->setCreatedAt(new \DateTime());
 
         return $picture;
