@@ -138,15 +138,13 @@ sont visibles.
 
 ### Picture
 
-- [ ] On peut créer des images.
+- [x] On peut créer des images.
 
-- [ ] On peut lister des images.
+- [ ] On peut lister les images.
 
-- [ ] On peut créer / lister / accéder au détail des images. Les images sont créées via l'API avant les annonces (en envoyant
-  le fichier) et l'annonce reçoit la liste des images téléchargées lors de la création (c'est à ce moment-là que le lien
-  est fait entre annonce et image en base de données).
+- [ ] On peut accéder au détail des images. 
 
-- [ ] On peut créer / lister / accéder au détail des images. Les images sont créées via l'API avant les annonces (en envoyant
+- [ ] Les images sont créées via l'API avant les annonces (en envoyant
   le fichier) et l'annonce reçoit la liste des images téléchargées lors de la création (c'est à ce moment-là que le lien
   est fait entre annonce et image en base de données).
 
