@@ -126,6 +126,12 @@ class AdvertController extends AbstractController
             <div class="globalContainer">
                 <h2>Une nouvelle annonce &agrave; &eacute;t&eacute; cr&eacute;&eacute;e le <b>'.$advert->getCreatedAt()->format("d-m-Y").'</b> &agrave; <b>'.$advert->getCreatedAt()->format("H:i:s").'</b></h2>
             
+                <div class="blockButtons">
+                    <a href="http://localhost:8000/admin/show/'.$advert->getId().'"><button>Consulter</button></a>
+                    <a href="http://localhost:8000/admin/advertvalidation/validate/'.$advert->getId().'&index"><button>Publier</button></a>
+                    <a href="http://localhost:8000/admin/advertvalidation/reject/'.$advert->getId().'&index"><button>Rejeter</button></a>
+                </div>
+            
                 <div class="blockAdvert">
                     <h3>Descriptif de l\'annonce : </h3>
                     <ul>

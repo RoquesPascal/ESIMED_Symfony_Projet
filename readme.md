@@ -67,7 +67,7 @@ sauvé dans password grace
 
 - [x] Lorsqu'une annonce est créée, sa date de création est automatiquement renseignée.
 
-- [ ] Il en est de même pour les images.
+- [x] Il en est de même pour les images.
 
 ## Workflow des annonces
 
@@ -94,7 +94,7 @@ connexion.
 
 - [x] Un admin ne peut pas supprimer son propre compte.
 
-- [ ] Il doit forcément rester un admin.
+- [x] Il doit forcément rester un admin.
 
 ### Crud Category
 
@@ -153,7 +153,7 @@ sont visibles.
 
 - [x] Lorsqu'une annonce est créée, une notification par mail est envoyée à tous les AdminUser.
 
-- [ ] La notification contient 3 boutons : un permettant d'envoyer sur la fiche de consultation dans l'admin, un second
+- [x] La notification contient 3 boutons : un permettant d'envoyer sur la fiche de consultation dans l'admin, un second
 permettant de publier l'annonce et un troisième de rejeter l'annonce.
 
 ## Test
