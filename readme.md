@@ -66,6 +66,7 @@ sauvé dans password grace
 ## Renseignement de la date de création
 
 - [x] Lorsqu'une annonce est créée, sa date de création est automatiquement renseignée.
+
 - [ ] Il en est de même pour les images.
 
 ## Workflow des annonces

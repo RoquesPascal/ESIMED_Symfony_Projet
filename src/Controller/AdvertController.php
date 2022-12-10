@@ -7,6 +7,7 @@ use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\Service\ManageWorkflow;
+use \Mailjet\Resources;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -77,6 +78,36 @@ class AdvertController extends AbstractController
             $advert->setCreatedAt(new \DateTime());
 
             $advertRepository->save($advert, true);
+
+
+
+
+            $adresseEMail = "passekale.raukes@gmail.com";
+            $nomEMail = "Passekale";
+            $mj = new \Mailjet\Client('4590410afca071cdf92a811a78bd614a', '352ab93f42f27b80f00d8cb7c4dbcc38', true, ['version' => 'v3.1']);
+            $body = [
+                'Messages' => [
+                    [
+                        'From' => [
+                            'Email' => $adresseEMail,
+                            'Name' => $nomEMail
+                        ],
+                        'To' => [
+                            [
+                                'Email' => $adresseEMail,
+                                'Name' => $nomEMail
+                            ]
+                        ],
+                        'Subject' => "Greetings from Mailjet.",
+                        'TextPart' => "My first Mailjet email",
+                        'HTMLPart' => "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
+                        'CustomID' => "AppGettingStartedTest"
+                    ]
+                ]
+            ];
+            $response = $mj->post(Resources::$Email, ['body' => $body]);
+
+
             return $this->redirectToRoute('index');
         }
 
