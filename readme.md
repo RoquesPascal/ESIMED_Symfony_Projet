@@ -59,7 +59,7 @@ AdminUser : password - string not null
 
 ## Encodage des mots de passe
 
-- [X] Lorsqu'un admin est créé ou modifié, si son plainPassword (mot de passe en clair) est renseigné, il doit être encodé et
+- [x] Lorsqu'un admin est créé ou modifié, si son plainPassword (mot de passe en clair) est renseigné, il doit être encodé et
 sauvé dans password grace
 à [un listener (ou subscriber) doctrine](https://symfony.com/doc/current/security.html#c-encoding-passwords).
 
@@ -77,7 +77,7 @@ peuvent les publier (status `published` ) ou les rejeter (status `rejected`). Un
 
 - [x] Quand une annonce passe du status `draft` à `published`, sa date de publication est automatiquement renseignée
 
-- [ ] Quand une annonce passe du status `draft` à `published`, un mail de notification est envoyé à l'utilisateur qui l'a créée.
+- [x] Quand une annonce passe du status `draft` à `published`, un mail de notification est envoyé à l'utilisateur qui l'a créée.
 
 ## Admin
 
