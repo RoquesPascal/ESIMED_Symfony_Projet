@@ -8,13 +8,13 @@ use App\Repository\AdminUserRepository;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\Service\ManageWorkflow;
+use DateInterval;
 use \Mailjet\Resources;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Workflow\Registry;
 
@@ -78,18 +78,17 @@ class AdvertController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $advert->setState('draft');
-            $advert->setCreatedAt(new \DateTime());
+            $dateNow = new \DateTime();
+            $dateNow->add(new DateInterval('PT1H'));
+            $advert->setCreatedAt($dateNow);
 
             $advertRepository->save($advert, true);
 
-            $heure = new \DateTime();
-            $heure = $heure->format('d-m-Y H:i:s');
-
-            $to = [];
+            $sendTo = [];
             $listAdmin = $adminUserRepository->findAll();
             foreach ($listAdmin as $admin)
             {
-                $to[] = [
+                $sendTo[] = [
                     'Email' => $admin->getEmail(),
                 ];
             }
@@ -102,11 +101,9 @@ class AdvertController extends AbstractController
                             'Email' => "passekale.raukes@gmail.com",
                             'Name' => "Passekale"
                         ],
-                        'To' => $to,
-                        'Subject' => "Greetings from Mailjet.",
-                        'TextPart' => "My first Mailjet email",
-                        'HTMLPart' => "<h3>".$heure." Deaaaaaaaaaaaaaaaaaar passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
-                        'CustomID' => "AppGettingStartedTest"
+                        'To' => $sendTo,
+                        'Subject' => "Nouvelle annonce !",
+                        'HTMLPart' => $this->writeEmail($advert),
                     ]
                 ]
             ];
@@ -121,6 +118,33 @@ class AdvertController extends AbstractController
             'form' => $form->createView(),
             'listCategories' => $listCategories,
         ]);
+    }
+
+    private function writeEmail(Advert $advert) : string
+    {
+        return '
+            <div class="globalContainer">
+                <h2>Une nouvelle annonce &agrave; &eacute;t&eacute; cr&eacute;&eacute;e le <b>'.$advert->getCreatedAt()->format("d-m-Y").'</b> &agrave; <b>'.$advert->getCreatedAt()->format("H:i:s").'</b></h2>
+            
+                <div class="blockAdvert">
+                    <h3>Descriptif de l\'annonce : </h3>
+                    <ul>
+                        <li><b>id :</b> '.$advert->getId().'</li>
+                        <li><b>Cat&eacute;gorie :</b></li>
+                            <ul>
+                                <li><b>id :</b> '.$advert->getCategory()->getId().'</li>
+                                <li><b>Libell&eacute; :</b> '.$advert->getCategory()->getName().'</li>
+                            </ul>
+                        <li><b>Titre :</b> '.$advert->getTitle().'</li>
+                        <li><b>Contenu :</b> '.$advert->getContent().'</li>
+                        <li><b>Auteur :</b> '.$advert->getAuthor().'</li>
+                        <li><b>Email :</b> '.$advert->getEmail().'</li>
+                        <li><b>Prix :</b> '.$advert->getPrice().'</li>
+                        <li><b>Date de cr&eacute;ation :</b> le '.$advert->getCreatedAt()->format("d-m-Y").' &agrave; '.$advert->getCreatedAt()->format("H:i:s").'</li>
+                    </ul>
+                </div>
+            </div>
+        ';
     }
 
     #[Route('/show/{id}', name: 'show')]
