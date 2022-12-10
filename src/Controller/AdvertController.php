@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Advert;
 use App\Form\AdvertType;
+use App\Repository\AdminUserRepository;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\Service\ManageWorkflow;
@@ -13,6 +14,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Workflow\Registry;
 
@@ -63,7 +65,8 @@ class AdvertController extends AbstractController
     }
 
     #[Route('/add', name: 'add_advert')]
-    public function add(AdvertRepository $advertRepository,
+    public function add(AdminUserRepository $adminUserRepository,
+                        AdvertRepository $advertRepository,
                         CategoryRepository $categoryRepository,
                         Request $request
     ): Response
@@ -79,34 +82,35 @@ class AdvertController extends AbstractController
 
             $advertRepository->save($advert, true);
 
+            $heure = new \DateTime();
+            $heure = $heure->format('d-m-Y H:i:s');
 
+            $to = [];
+            $listAdmin = $adminUserRepository->findAll();
+            foreach ($listAdmin as $admin)
+            {
+                $to[] = [
+                    'Email' => $admin->getEmail(),
+                ];
+            }
 
-
-            $adresseEMail = "passekale.raukes@gmail.com";
-            $nomEMail = "Passekale";
             $mj = new \Mailjet\Client('4590410afca071cdf92a811a78bd614a', '352ab93f42f27b80f00d8cb7c4dbcc38', true, ['version' => 'v3.1']);
             $body = [
                 'Messages' => [
                     [
                         'From' => [
-                            'Email' => $adresseEMail,
-                            'Name' => $nomEMail
+                            'Email' => "passekale.raukes@gmail.com",
+                            'Name' => "Passekale"
                         ],
-                        'To' => [
-                            [
-                                'Email' => $adresseEMail,
-                                'Name' => $nomEMail
-                            ]
-                        ],
+                        'To' => $to,
                         'Subject' => "Greetings from Mailjet.",
                         'TextPart' => "My first Mailjet email",
-                        'HTMLPart' => "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
+                        'HTMLPart' => "<h3>".$heure." Deaaaaaaaaaaaaaaaaaar passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
                         'CustomID' => "AppGettingStartedTest"
                     ]
                 ]
             ];
             $response = $mj->post(Resources::$Email, ['body' => $body]);
-
 
             return $this->redirectToRoute('index');
         }

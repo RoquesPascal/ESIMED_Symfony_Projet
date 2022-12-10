@@ -151,7 +151,7 @@ sont visibles.
 
 ## Notification
 
-- [ ] Lorsqu'une annonce est créée, une notification par mail est envoyée à tous les AdminUser.
+- [x] Lorsqu'une annonce est créée, une notification par mail est envoyée à tous les AdminUser.
 
 - [ ] La notification contient 3 boutons : un permettant d'envoyer sur la fiche de consultation dans l'admin, un second
 permettant de publier l'annonce et un troisième de rejeter l'annonce.
