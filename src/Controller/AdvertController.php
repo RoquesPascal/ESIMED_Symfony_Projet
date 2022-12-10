@@ -93,21 +93,7 @@ class AdvertController extends AbstractController
                 ];
             }
 
-            $mj = new \Mailjet\Client('4590410afca071cdf92a811a78bd614a', '352ab93f42f27b80f00d8cb7c4dbcc38', true, ['version' => 'v3.1']);
-            $body = [
-                'Messages' => [
-                    [
-                        'From' => [
-                            'Email' => "passekale.raukes@gmail.com",
-                            'Name' => "Passekale"
-                        ],
-                        'To' => $sendTo,
-                        'Subject' => "Nouvelle annonce !",
-                        'HTMLPart' => $this->writeEmail($advert),
-                    ]
-                ]
-            ];
-            $response = $mj->post(Resources::$Email, ['body' => $body]);
+            $this->sendEmail($advert, "emailNewAdvert", $sendTo);
 
             return $this->redirectToRoute('index');
         }
@@ -118,39 +104,6 @@ class AdvertController extends AbstractController
             'form' => $form->createView(),
             'listCategories' => $listCategories,
         ]);
-    }
-
-    private function writeEmail(Advert $advert) : string
-    {
-        return '
-            <div class="globalContainer">
-                <h2>Une nouvelle annonce &agrave; &eacute;t&eacute; cr&eacute;&eacute;e le <b>'.$advert->getCreatedAt()->format("d-m-Y").'</b> &agrave; <b>'.$advert->getCreatedAt()->format("H:i:s").'</b></h2>
-            
-                <div class="blockButtons">
-                    <a href="http://localhost:8000/admin/show/'.$advert->getId().'"><button>Consulter</button></a>
-                    <a href="http://localhost:8000/admin/advertvalidation/validate/'.$advert->getId().'&index"><button>Publier</button></a>
-                    <a href="http://localhost:8000/admin/advertvalidation/reject/'.$advert->getId().'&index"><button>Rejeter</button></a>
-                </div>
-            
-                <div class="blockAdvert">
-                    <h3>Descriptif de l\'annonce : </h3>
-                    <ul>
-                        <li><b>id :</b> '.$advert->getId().'</li>
-                        <li><b>Cat&eacute;gorie :</b></li>
-                            <ul>
-                                <li><b>id :</b> '.$advert->getCategory()->getId().'</li>
-                                <li><b>Libell&eacute; :</b> '.$advert->getCategory()->getName().'</li>
-                            </ul>
-                        <li><b>Titre :</b> '.$advert->getTitle().'</li>
-                        <li><b>Contenu :</b> '.$advert->getContent().'</li>
-                        <li><b>Auteur :</b> '.$advert->getAuthor().'</li>
-                        <li><b>Email :</b> '.$advert->getEmail().'</li>
-                        <li><b>Prix :</b> '.$advert->getPrice().'</li>
-                        <li><b>Date de cr&eacute;ation :</b> le '.$advert->getCreatedAt()->format("d-m-Y").' &agrave; '.$advert->getCreatedAt()->format("H:i:s").'</li>
-                    </ul>
-                </div>
-            </div>
-        ';
     }
 
     #[Route('/show/{id}', name: 'show')]
@@ -271,6 +224,14 @@ class AdvertController extends AbstractController
     {
         ManageWorkflow::Publish($request->attributes->get('id'), $advertRepository, $registry);
 
+        $advert = $advertRepository->find($request->attributes->get('id'));
+        $sendTo = [];
+        $sendTo[] = [
+            'Email' => $advert->getEmail(),
+        ];
+
+        $this->sendEmail($advert, "emailAdvertPublished", $sendTo);
+
         return match($request->attributes->get('view'))
         {
             'index'     => $this->redirectToRoute('admin_index'),
@@ -294,5 +255,95 @@ class AdvertController extends AbstractController
             'rejected'  => $this->redirectToRoute('admin_advert_list_rejected'),
             default     => $this->redirectToRoute('admin_listbycategories', ['id' => $request->attributes->get('view')]),
         };
+    }
+
+    private function sendEmail(Advert $advert, String $emailType, array $sendTo)
+    {
+        switch($emailType)
+        {
+            case 'emailNewAdvert':
+                $subject = "Nouvelle annonce !";
+                $emailBody = $this->writeEmailNewAdvert($advert);
+                break;
+            case 'emailAdvertPublished':
+                $subject = "Votre annonce a été publiée !";
+                $emailBody = $this->writeEmailAdvertPublished($advert);
+                break;
+            default:
+                return;
+        }
+
+        $mj = new \Mailjet\Client('4590410afca071cdf92a811a78bd614a', '352ab93f42f27b80f00d8cb7c4dbcc38', true, ['version' => 'v3.1']);
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        'Email' => "passekale.raukes@gmail.com",
+                        'Name' => "Passekale"
+                    ],
+                    'To' => $sendTo,
+                    'Subject' => $subject,
+                    'HTMLPart' => $emailBody,
+                ]
+            ]
+        ];
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
+    }
+
+    private function writeEmailAdvertPublished(Advert $advert) : string
+    {
+        return '
+            <div class="globalContainer">
+                <h2>Votre annonce &agrave; &eacute;t&eacute; publi&eacute;e le <b>'.$advert->getPublishedAt()->format("d-m-Y").'</b> &agrave; <b>'.$advert->getPublishedAt()->format("H:i:s").'</b></h2>
+            
+                <div class="blockButtons">
+                    <a href="http://localhost:8000/show/'.$advert->getId().'"><button>Consulter</button></a>
+                </div>
+            
+                <div class="blockAdvert">
+                    <h3>Descriptif de l\'annonce : </h3>
+                    <ul>
+                        <li><b>Cat&eacute;gorie :</b> '.$advert->getCategory()->getName().'</li>
+                        <li><b>Titre :</b> '.$advert->getTitle().'</li>
+                        <li><b>Contenu :</b> '.$advert->getContent().'</li>
+                        <li><b>Prix :</b> '.$advert->getPrice().'</li>
+                        <li><b>Date de publication :</b> le '.$advert->getPublishedAt()->format("d-m-Y").' &agrave; '.$advert->getPublishedAt()->format("H:i:s").'</li>
+                    </ul>
+                </div>
+            </div>
+        ';
+    }
+
+    private function writeEmailNewAdvert(Advert $advert) : string
+    {
+        return '
+            <div class="globalContainer">
+                <h2>Une nouvelle annonce &agrave; &eacute;t&eacute; cr&eacute;&eacute;e le <b>'.$advert->getCreatedAt()->format("d-m-Y").'</b> &agrave; <b>'.$advert->getCreatedAt()->format("H:i:s").'</b></h2>
+            
+                <div class="blockButtons">
+                    <a href="http://localhost:8000/admin/show/'.$advert->getId().'"><button>Consulter</button></a>
+                    <a href="http://localhost:8000/admin/advertvalidation/validate/'.$advert->getId().'&index"><button>Publier</button></a>
+                    <a href="http://localhost:8000/admin/advertvalidation/reject/'.$advert->getId().'&index"><button>Rejeter</button></a>
+                </div>
+            
+                <div class="blockAdvert">
+                    <h3>Descriptif de l\'annonce : </h3>
+                    <ul>
+                        <li><b>id :</b> '.$advert->getId().'</li>
+                        <li><b>Cat&eacute;gorie :</b></li>
+                            <ul>
+                                <li><b>id :</b> '.$advert->getCategory()->getId().'</li>
+                                <li><b>Libell&eacute; :</b> '.$advert->getCategory()->getName().'</li>
+                            </ul>
+                        <li><b>Titre :</b> '.$advert->getTitle().'</li>
+                        <li><b>Contenu :</b> '.$advert->getContent().'</li>
+                        <li><b>Auteur :</b> '.$advert->getAuthor().'</li>
+                        <li><b>Email :</b> '.$advert->getEmail().'</li>
+                        <li><b>Prix :</b> '.$advert->getPrice().'</li>
+                        <li><b>Date de cr&eacute;ation :</b> le '.$advert->getCreatedAt()->format("d-m-Y").' &agrave; '.$advert->getCreatedAt()->format("H:i:s").'</li>
+                    </ul>
+                </div>
+            </div>
+        ';
     }
 }

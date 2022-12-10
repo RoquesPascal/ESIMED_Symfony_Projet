@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Repository\AdvertRepository;
+use DateInterval;
 use Symfony\Component\Workflow\Registry;
 
 class ManageWorkflow
@@ -15,7 +16,9 @@ class ManageWorkflow
         {
             $workflow->apply($advert, 'publish');
             $workflow->getEnabledTransitions($advert);
-            $advert->setPublishedAt(new \DateTime());
+            $dateNow = new \DateTime();
+            $dateNow->add(new DateInterval('PT1H'));
+            $advert->setPublishedAt($dateNow);
             $advertRepository->save($advert, true);
         }
     }
