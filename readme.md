@@ -158,7 +158,7 @@ permettant de publier l'annonce et un troisième de rejeter l'annonce.
 
 ## Test
 
-- [ ] L'API doit être intégralement testée. Vous pouvez voir comment tester une API dans
+- [x] L'API doit être intégralement testée. Vous pouvez voir comment tester une API dans
 la [documentation d'API platform](https://api-platform.com/docs/core/testing/).
 
 ## Commandes (bonus)
