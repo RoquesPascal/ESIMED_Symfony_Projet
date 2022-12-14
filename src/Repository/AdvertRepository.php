@@ -39,6 +39,36 @@ class AdvertRepository extends ServiceEntityRepository
         }
     }
 
+    /*public function deleteEveryPublishedPublishedXDaysAgo(Int $nbDays) : void
+    {
+        $dateNow = new \DateTime();
+        $removeDate = date('Y-m-d', strtotime('-'.$nbDays.' day', strtotime($dateNow->format('Y-m-d'))));
+
+        $this->createQueryBuilder('a')
+            ->delete()
+            ->where('a.state = published')
+            ->andWhere('a.publishedAt <= :removeDate')
+            ->setParameter('removeDate', $removeDate)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function deleteEveryRejectedCreatedXDaysAgo(Int $nbDays) : void
+    {
+        $dateNow = new \DateTime();
+        $removeDate = date('Y-m-d', strtotime('-'.$nbDays.' day', strtotime($dateNow->format('Y-m-d'))));
+
+        $this->createQueryBuilder('a')
+            ->delete()
+            ->where('a.state = rejected')
+            ->andWhere('a.createdAt <= :removeDate')
+            ->setParameter('removeDate', $removeDate)
+            ->getQuery()
+            ->getResult()
+        ;
+    }*/
+
 //    /**
 //     * @return Advert[] Returns an array of Advert objects
 //     */

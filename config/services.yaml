@@ -26,5 +26,9 @@ services:
         arguments:
             $uploadPath: 'uploads_directory'
 
+    App\Command\Commands:
+        tags:
+            - { name: 'console.command', command: 'app:sunshine' }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
