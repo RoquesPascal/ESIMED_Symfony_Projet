@@ -13,19 +13,21 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(form) }}
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
+    <div class="formAddEditCategory">
+        {{ form_start(form) }}
+            Nom de la cat&eacute;gorie
+            {{ form_widget(form.name) }}
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        {{ form_rest(form) }}
-        <button type="submit">
-            {% if(ajout) %}
-                Ajouter
-            {% else %}
-                Enregistrer
-            {% endif %}
-        </button>
-    {{ form_end(form) }}
+            {{ form_rest(form) }}
+            <button type="submit">
+                {% if(ajout) %}
+                    Ajouter
+                {% else %}
+                    Enregistrer
+                {% endif %}
+            </button>
+        {{ form_end(form) }}
+    <div>
 {% endblock %}

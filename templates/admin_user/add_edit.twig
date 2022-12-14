@@ -13,25 +13,26 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(form) }}
-        {{ form_label(form.username) }}
-        {{ form_widget(form.username) }}
-        <br/>
+    <div class="formAddEditAdminUser">
+        {{ form_start(form) }}
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+            <hr width="100%"/>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            <hr width="100%"/>
+            {{ form_label(form.plainPassword) }}
+            {{ form_widget(form.plainPassword) }}
 
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        <br/>
-
-        {{ form_label(form.plainPassword) }}
-        {{ form_widget(form.plainPassword) }}
-
-        {{ form_rest(form) }}
-        <button type="submit">
-            {% if(ajout) %}
-                Ajouter
-            {% else %}
-                Enregistrer
-            {% endif %}
-        </button>
-    {{ form_end(form) }}
+            {{ form_rest(form) }}
+            <hr width="100%"/>
+            <button type="submit">
+                {% if(ajout) %}
+                    Ajouter
+                {% else %}
+                    Enregistrer
+                {% endif %}
+            </button>
+        {{ form_end(form) }}
+    <div>
 {% endblock %}

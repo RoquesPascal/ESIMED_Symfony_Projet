@@ -7,28 +7,31 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(form) }}
-        {{ form_label(form.title) }}
-        {{ form_widget(form.title) }}
-        <br/>
-        {{ form_label(form.content) }}
-        {{ form_widget(form.content) }}
-        <br/>
-        {{ form_label(form.category) }}
-        {{ form_widget(form.category) }}
-        <br/>
-        {{ form_label(form.author) }}
-        {{ form_widget(form.author) }}
-        <br/>
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        <br/>
-        {{ form_label(form.price) }}
-        {{ form_widget(form.price) }}
-        <br/>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="formAddAdvert">
+        {{ form_start(form) }}
+            Titre
+            {{ form_widget(form.title) }}
+            <hr width="100%"/>
+            Contenu
+            {{ form_widget(form.content) }}
+            <hr width="100%"/>
+            Cat&eacute;gorie
+            {{ form_widget(form.category) }}
+            <hr width="100%"/>
+            Auteur
+            {{ form_widget(form.author) }}
+            <hr width="100%"/>
+            Email
+            {{ form_widget(form.email) }}
+            <hr width="100%"/>
+            Prix
+            {{ form_widget(form.price) }}
+            <br/>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        {{ form_rest(form) }}
-        <button type="submit">Ajouter</button>
-    {{ form_end(form) }}
+            {{ form_rest(form) }}
+            <hr width="100%"/>
+            <button type="submit">Ajouter</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
