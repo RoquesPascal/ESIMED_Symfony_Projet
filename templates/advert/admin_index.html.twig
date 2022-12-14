@@ -2,23 +2,27 @@
 
 {% block title %}Liste des annonces{% endblock %}
 
-{% block body %}
+{% block header %}
     <a href="{{ path('index') }}"><button>Menu principal</button></a>
     <a href="{{ path('admin_advert_list_draft') }}"><button>V&eacute;rifier les nouvelles annonces (admin)</button></a>
     <a href="{{ path('admin_advert_list_published') }}"><button>Voir les annonces publi&eacute;es (admin)</button></a>
     <a href="{{ path('admin_advert_list_rejected') }}"><button>voir les annonces rejet&eacute;es (admin)</button></a>
     <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories (admin)</button></a>
     <a href="{{ path('admin_users') }}"><button>Voir les administrateurs (admin)</button></a>
+{% endblock %}
 
-    <form action="{{ path('admin_index') }}" method="post">
-        <select name="category">
-            <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
-            {% for category in listCategoriesWithAdverts %}
-                <option value="{{ category.getId() }}">{{ category.getName() }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Rechercher par cat&eacute;gorie</button>
-    </form>
+{% block content %}
+    <div class="formSortByCategory">
+        <form action="{{ path('admin_index') }}" method="post">
+            <select name="category">
+                <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
+                {% for category in listCategoriesWithAdverts %}
+                    <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Rechercher par cat&eacute;gorie</button>
+        </form>
+    </div>
 
     <table>
         <tr>

@@ -2,23 +2,28 @@
 
 {% block title %}Liste des annonces{% endblock %}
 
-{% block body %}
+{% block header %}
     <a href="{{ path('add_advert') }}"><button>Ajouter une annonce</button></a>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a href="{{ path('admin_index') }}"><button>Acc&eacute;der &agrave; la partie administration</button></a>
     {% else %}
         <a href="{{ path('admin_login') }}"><button>Se connecter en administrateur</button></a>
     {% endif %}
+{% endblock %}
 
-    <form action="{{ path('index') }}" method="post">
-        <select name="category">
-            <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
-            {% for category in listCategoriesWithPublishedAdverts %}
-                <option value="{{ category.getId() }}">{{ category.getName() }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Rechercher par cat&eacute;gorie</button>
-    </form>
+{% block content %}
+
+    <div class="formSortByCategory">
+        <form action="{{ path('index') }}" method="post">
+            <select name="category" required>
+                <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
+                {% for category in listCategoriesWithPublishedAdverts %}
+                    <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Rechercher par cat&eacute;gorie</button>
+        </form>
+    </div>
 
     <table>
         <tr>
@@ -34,11 +39,11 @@
         </tr>
         {% for advertPublished in pager.currentPageResults  %}
             <tr>
-                <td>{{ advertPublished.getTitle() }}</td>
-                <td>{{ advertPublished.getContent() }}</td>
-                <td>{{ advertPublished.getCategory().getName() }}</td>
-                <td>{{ advertPublished.getAuthor() }}</td>
-                <td>{{ advertPublished.getEmail() }}</td>
+                <td>{{ advertPublished.getTitle()|length > 35 ? advertPublished.getTitle()|slice(0, 35) ~ '...' : advertPublished.getTitle() }}</td>
+                <td>{{ advertPublished.getContent()|length > 35 ? advertPublished.getContent()|slice(0, 35) ~ '...' : advertPublished.getContent() }}</td>
+                <td>{{ advertPublished.getCategory().getName()|length > 35 ? advertPublished.getCategory().getName()|slice(0, 35) ~ '...' : advertPublished.getCategory().getName() }}</td>
+                <td>{{ advertPublished.getAuthor()|length > 35 ? advertPublished.getAuthor()|slice(0, 35) ~ '...' : advertPublished.getAuthor() }}</td>
+                <td>{{ advertPublished.getEmail()|length > 35 ? advertPublished.getEmail()|slice(0, 35) ~ '...' : advertPublished.getEmail() }}</td>
                 <td>{{ advertPublished.getPrice() }}</td>
                 <td>{{ advertPublished.getState() }}</td>
                 <td>{{ advertPublished.getPublishedAt()|date("d-m-Y H:i:s") }}</td>

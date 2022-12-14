@@ -2,9 +2,11 @@
 
 {% block title %}D&eacute;tails de l'annonce{% endblock %}
 
-{% block body %}
+{% block header %}
     <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+{% endblock %}
 
+{% block content %}
     <table>
         <tr>
             <th>id</th>

@@ -2,14 +2,12 @@
 
 {% block title %}Liste annonces{% endblock %}
 
-{% block stylesheets %}
-{#    <link type="text/css" rel="stylesheet" href="../../content/style/style.css"/>#}
-{% endblock %}
-
-{% block body %}
+{% block header %}
     <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
     <a href="{{ path('admin_category_add') }}"><button>Ajouter une cat&eacute;gorie (admin)</button></a>
+{% endblock %}
 
+{% block content %}
     <table>
         <tr>
             <th>id</th>

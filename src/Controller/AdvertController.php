@@ -46,7 +46,9 @@ class AdvertController extends AbstractController
     }
 
     #[Route('/listbycategories/{id}', name: 'listbycategories')]
-    public function listbycategories(AdvertRepository $advertRepository, Request $request): Response
+    public function listbycategories(AdvertRepository $advertRepository,
+                                     CategoryRepository $categoryRepository,
+                                     Request $request): Response
     {
         $queryBuilder = $advertRepository
             ->createQueryBuilder('a')
@@ -59,8 +61,10 @@ class AdvertController extends AbstractController
         $pager->setMaxPerPage(30);
         $pager->setCurrentPage($request->get('page', 1));
 
+        $listCategoriesWithPublishedAdverts = $categoryRepository->getCategoriesWithPublishedAdverts();
         return $this->render('advert/list_by_category.html.twig', [
             'pager' => $pager,
+            'listCategoriesWithPublishedAdverts' => $listCategoriesWithPublishedAdverts,
         ]);
     }
 

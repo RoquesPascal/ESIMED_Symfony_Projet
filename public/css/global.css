@@ -1,0 +1,55 @@
+body
+{
+    margin : 0;
+    padding : 0;
+}
+
+.formSortByCategory
+{
+    margin-bottom : 0.5%;
+    text-align: center;
+}
+
+header
+{
+    background-color : #f8f8f8;
+    box-shadow : 0px 5px 25px #000000;
+    height : 73px;
+    margin-bottom : 2%;
+    position : sticky;
+    position : -webkit-sticky;
+    top : 0px;
+    z-index : 99;
+}
+
+table
+{
+    border-collapse : collapse;
+    border-spacing  : 0;
+    margin          : auto;
+}
+
+table tr:nth-child(odd) /* Mettre 1 ligne sur 2 d'une autre couleur */
+{
+    background-color : #f0f0f0;
+}
+
+td, th
+{
+    text-align : center;
+}
+
+td
+{
+    border-top : 1px solid black;
+    padding : 7px;
+}
+
+th
+{
+    background-color : #c3c5f8;
+    color       : black;
+    font-size   : 25px;
+    font-weight : bold;
+    padding : 15px;
+}

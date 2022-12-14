@@ -2,13 +2,11 @@
 
 {% block title %}Ajout{% endblock %}
 
-{% block stylesheets %}
-    {#    <link type="text/css" rel="stylesheet" href="../../content/style/style.css"/>#}
+{% block header %}
+    <a href="{{ path('index') }}"><button>Menu principal</button></a>
 {% endblock %}
 
-{% block body %}
-    <a href="{{ path('index') }}"><button>Menu principal</button></a>
-
+{% block content %}
     {{ form_start(form) }}
         {{ form_label(form.title) }}
         {{ form_widget(form.title) }}

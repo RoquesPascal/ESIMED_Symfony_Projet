@@ -8,13 +8,11 @@
     {% endif %}
 {% endblock %}
 
-{% block stylesheets %}
-{#    <link type="text/css" rel="stylesheet" href="../../content/style/style.css"/>#}
+{% block header %}
+    <a href="{{ path('admin_category_index') }}"><button>Liste des cat&eacute;gories (admin)</button></a>
 {% endblock %}
 
-{% block body %}
-    <a href="{{ path('admin_category_index') }}"><button>Liste des cat&eacute;gories (admin)</button></a>
-
+{% block content %}
     {{ form_start(form) }}
         {{ form_label(form.name) }}
         {{ form_widget(form.name) }}

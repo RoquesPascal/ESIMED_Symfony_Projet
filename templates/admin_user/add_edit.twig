@@ -8,13 +8,11 @@
     {% endif %}
 {% endblock %}
 
-{% block stylesheets %}
-
+{% block header %}
+    <a href="{{ path('admin_users') }}"><button>Voir les administrateurs (admin)</button></a>
 {% endblock %}
 
-{% block body %}
-    <a href="{{ path('admin_users') }}"><button>Voir les administrateurs (admin)</button></a>
-
+{% block content %}
     {{ form_start(form) }}
         {{ form_label(form.username) }}
         {{ form_widget(form.username) }}

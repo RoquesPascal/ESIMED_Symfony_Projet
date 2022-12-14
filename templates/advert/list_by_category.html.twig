@@ -2,8 +2,23 @@
 
 {% block title %}Liste des annonces{% endblock %}
 
-{% block body %}
+{% block header %}
     <a href="{{ path('index') }}"><button>Menu principal</button></a>
+{% endblock %}
+
+{% block content %}
+
+    <div class="formSortByCategory">
+        <form action="{{ path('index') }}" method="post">
+            <select name="category" required>
+                <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
+                {% for category in listCategoriesWithPublishedAdverts %}
+                    <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Rechercher par cat&eacute;gorie</button>
+        </form>
+    </div>
 
     {% if(pager.currentPageResults != null) %}
         <table>
@@ -20,11 +35,11 @@
             </tr>
             {% for advert in pager.currentPageResults  %}
                 <tr>
-                    <td>{{ advert.getTitle() }}</td>
-                    <td>{{ advert.getContent() }}</td>
-                    <td>{{ advert.getCategory().getName() }}</td>
-                    <td>{{ advert.getAuthor() }}</td>
-                    <td>{{ advert.getEmail() }}</td>
+                    <td>{{ advert.getTitle()|length > 35 ? advert.getTitle()|slice(0, 35) ~ '...' : advert.getTitle() }}</td>
+                    <td>{{ advert.getContent()|length > 35 ? advert.getContent()|slice(0, 35) ~ '...' : advert.getContent() }}</td>
+                    <td>{{ advert.getCategory().getName()|length > 35 ? advert.getCategory().getName()|slice(0, 35) ~ '...' : advert.getCategory().getName() }}</td>
+                    <td>{{ advert.getAuthor()|length > 35 ? advert.getAuthor()|slice(0, 35) ~ '...' : advert.getAuthor() }}</td>
+                    <td>{{ advert.getEmail()|length > 35 ? advert.getEmail()|slice(0, 35) ~ '...' : advert.getEmail() }}</td>
                     <td>{{ advert.getPrice() }}</td>
                     <td>{{ advert.getState() }}</td>
                     <td>{{ advert.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
