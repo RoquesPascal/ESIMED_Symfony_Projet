@@ -20,10 +20,11 @@ class AdvertType extends AbstractType
         $builder
             ->add('title', TextType::class, ['required' => true])
             ->add('content', TextareaType::class, ['required' => true])
-            ->add('category', EntityType::class, ['class' => Category::class,
-                                                            'choice_label' => 'name',
-                                                            'placeholder' => 'Choisir une catégorie',
-                                                            'required' => true])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir une catégorie',
+                'required' => true])
             ->add('author', TextType::class, ['required' => true])
             ->add('email', EmailType::class, ['required' => true])
             ->add('price', NumberType::class, ['required' => true])
