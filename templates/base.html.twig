@@ -14,7 +14,35 @@
         {% endblock %}
     </head>
     <body>
-        <header>{% block header %}{% endblock %}</header>
+        <header>
+            <div style="float:left;">
+                <a href="{{ path('index') }}">
+                    <img src="{{ asset('/ressources/images/LogoLeBonAngle.png') }}" height="100"/>
+                </a>
+            </div>
+
+            <div class="blockButton">{% block headerButtons %}{% endblock %}</div>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('admin_logout') }}">
+                    <div class="buttonLoginLogout">
+                        <img src="{{ asset('/ressources/images/IconLogout.png') }}" height="63" width="63"/>
+                    </div>
+                </a>
+                <a href="{{ path('admin_index') }}">
+                    <div class="buttonAdminIndex">
+                        <img src="{{ asset('/ressources/images/IconAdmin.png') }}" height="63" width="63"/>
+                    </div>
+                </a>
+                {{ app.user.username }} | {{ app.user.email }}
+            {% else %}
+                <a href="{{ path('admin_login') }}">
+                    <div class="buttonLoginLogout">
+                        <img src="{{ asset('/ressources/images/IconLogin.png') }}" height="63" width="63"/>
+                    </div>
+                </a>
+            {% endif %}
+        </header>
 
         {% block content %}{% endblock %}
     </body>

@@ -2,13 +2,14 @@
 
 {% block title %}Liste des annonces{% endblock %}
 
-{% block header %}
-    <a href="{{ path('index') }}"><button>Menu principal</button></a>
-    <a href="{{ path('admin_advert_list_draft') }}"><button>V&eacute;rifier les nouvelles annonces (admin)</button></a>
-    <a href="{{ path('admin_advert_list_published') }}"><button>Voir les annonces publi&eacute;es (admin)</button></a>
-    <a href="{{ path('admin_advert_list_rejected') }}"><button>voir les annonces rejet&eacute;es (admin)</button></a>
-    <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories (admin)</button></a>
-    <a href="{{ path('admin_users') }}"><button>Voir les administrateurs (admin)</button></a>
+{% block headerButtons %}
+        <a href="{{ path('admin_advert_list_draft') }}"><button>V&eacute;rifier les nouvelles annonces (admin)</button></a>
+        <a href="{{ path('admin_advert_list_published') }}"><button>Voir les annonces publi&eacute;es (admin)</button></a>
+        <a href="{{ path('admin_advert_list_rejected') }}"><button>Voir les annonces rejet&eacute;es (admin)</button></a>
+        <hr width="100%"/>
+        <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories (admin)</button></a>
+        <hr width="100%"/>
+        <a href="{{ path('admin_users') }}"><button>Voir les administrateurs (admin)</button></a>
 {% endblock %}
 
 {% block content %}
@@ -41,15 +42,15 @@
         {% for advert in pager.currentPageResults  %}
             <tr>
                 <td>{{ advert.getId() }}</td>
-                <td>{{ advert.getTitle() }}</td>
-                <td>{{ advert.getContent() }}</td>
-                <td>{{ advert.getCategory().getName() }}</td>
-                <td>{{ advert.getAuthor() }}</td>
-                <td>{{ advert.getEmail() }}</td>
+                <td>{{ advert.getTitle()|length > 35 ? advert.getTitle()|slice(0, 35) ~ '...' : advert.getTitle() }}</td>
+                <td>{{ advert.getContent()|length > 35 ? advert.getContent()|slice(0, 35) ~ '...' : advert.getContent() }}</td>
+                <td>{{ advert.getCategory().getName()|length > 35 ? advert.getCategory().getName()|slice(0, 35) ~ '...' : advert.getCategory().getName() }}</td>
+                <td>{{ advert.getAuthor()|length > 35 ? advert.getAuthor()|slice(0, 35) ~ '...' : advert.getAuthor() }}</td>
+                <td>{{ advert.getEmail()|length > 35 ? advert.getEmail()|slice(0, 35) ~ '...' : advert.getEmail() }}</td>
                 <td>{{ advert.getPrice() }}</td>
                 <td>{{ advert.getState() }}</td>
                 <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
-                <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
+                <td>{{ advert.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
                 <td><a href="{{ path('admin_show', {'id': advert.getId()}) }}"><button>Voir</button></a></td>
             </tr>
         {% endfor %}
