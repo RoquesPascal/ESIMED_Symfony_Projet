@@ -28,7 +28,6 @@
             <hr width="100%"/>
             Prix
             {{ form_widget(form.price) }}
-            <br/>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
             {{ form_rest(form) }}

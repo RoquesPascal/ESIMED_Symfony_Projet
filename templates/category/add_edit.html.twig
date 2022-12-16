@@ -10,7 +10,7 @@
 
 {% block headerButtons %}
     <div class="blockButton">
-        <a href="{{ path('admin_category_index') }}"><button>Liste des cat&eacute;gories (admin)</button></a>
+        <a href="{{ path('admin_category_index') }}"><button>Liste des cat&eacute;gories</button></a>
     </div>
 {% endblock %}
 
@@ -19,6 +19,8 @@
         {{ form_start(form) }}
             Nom de la cat&eacute;gorie
             {{ form_widget(form.name) }}
+
+            <hr width="100%"/>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
