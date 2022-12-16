@@ -39,16 +39,16 @@
             {% if advert.getState() == 'draft' %}
                 <td>
                     <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': 'index'}) }}">
-                        <img src="{{ asset('/ressources/images/IconOk.png') }}" height="30" width="30"/>
+                        <img class="buttonIconOk" src="{{ asset('/ressources/images/IconOk.png') }}" height="30" width="30" title="Publier"/>
                     </a>
                     <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': 'index'}) }}">
-                        <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                        <img class="buttonIconBin" src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30" title="Rejeter"/>
                     </a>
                 </td>
             {% elseif advert.getState() == 'published' %}
                 <td>
                     <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': 'index'}) }}">
-                        <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                        <img class="buttonIconBin" src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30" title="Rejeter"/>
                     </a>
                 </td>
             {% endif %}

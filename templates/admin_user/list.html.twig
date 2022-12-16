@@ -24,11 +24,11 @@
                 <td>{{ adminUser.getEmail() }}</td>
                 <td>
                     <a href="{{ path('admin_users_edit', {'id': adminUser.getId()}) }}">
-                        <img src="{{ asset('/ressources/images/IconEdit.png') }}" height="30" width="30"/>
+                        <img class="ButtonIconEdit" src="{{ asset('/ressources/images/IconEdit.png') }}" height="30" width="30" title="Modifier"/>
                     </a>
                     {% if app.user.email != adminUser.email %}
                         <a href="{{ path('admin_users_delete', {'id': adminUser.getId()}) }}">
-                            <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                            <img class="buttonIconBin" src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30" title="Supprimer"/>
                         </a>
                     {% endif %}
                 </td>

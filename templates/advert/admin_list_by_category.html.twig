@@ -49,17 +49,19 @@
                     <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
                     <td>{{ advert.getPublishedAt() is empty ? "" : advert.getPublishedAt|date("d-m-Y H:i:s") }}</td>
                     <td>
-                        <a href="{{ path('admin_show', {'id': advert.getId()}) }}"><img src="{{ asset('/ressources/images/IconShow.png') }}" height="30" width="30"/></a>
+                        <a href="{{ path('admin_show', {'id': advert.getId()}) }}">
+                            <img class="buttonIconShow" src="{{ asset('/ressources/images/IconShow.png') }}" height="30" width="30" title="Consulter"/>
+                        </a>
                         {% if advert.getState() == 'draft' %}
                             <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advert.getCategory().getId()}) }}">
-                                <img src="{{ asset('/ressources/images/IconOk.png') }}" height="30" width="30"/>
+                                <img class="buttonIconOk" src="{{ asset('/ressources/images/IconOk.png') }}" height="30" width="30" title="Publier"/>
                             </a>
                             <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advert.getCategory().getId()}) }}">
-                                <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                                <img class="buttonIconBin" src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30" title="Rejeter"/>
                             </a>
                         {% elseif advert.getState() == 'published' %}
                             <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advert.getCategory().getId()}) }}">
-                                <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                                <img class="buttonIconBin" src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30" title="Rejeter"/>
                             </a>
                         {% endif %}
                     </td>

@@ -22,11 +22,11 @@
                 <td>{{ category.getName() }}</td>
                 <td>
                     <a href="{{ path('admin_category_edit', { 'id': category.getId()}) }}">
-                        <img src="{{ asset('/ressources/images/IconEdit.png') }}" height="30" width="30"/>
+                        <img class="ButtonIconEdit" src="{{ asset('/ressources/images/IconEdit.png') }}" height="30" width="30" title="Modifier"/>
                     </a>
                     {% if(category.getId() not in listCategoriesDeletable) %}
                         <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}">
-                            <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                            <img class="buttonIconBin" src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30" title="Supprimer"/>
                         </a>
                     {% endif %}
                 </td>

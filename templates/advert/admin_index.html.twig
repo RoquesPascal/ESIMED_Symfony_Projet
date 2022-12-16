@@ -57,7 +57,7 @@
                 <td>{{ advert.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
                 <td>
                     <a href="{{ path('admin_show', {'id': advert.getId()}) }}">
-                        <img src="{{ asset('/ressources/images/IconShow.png') }}" height="30" width="30"/>
+                        <img class="buttonIconShow" src="{{ asset('/ressources/images/IconShow.png') }}" height="30" width="30" title="Consulter"/>
                     </a>
                 </td>
             </tr>

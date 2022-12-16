@@ -27,7 +27,7 @@ body
     top      : 5px;
 }
 
-.buttonAdminIndex, .buttonLoginLogout:hover
+.buttonAdminIndex:hover, .buttonLoginLogout:hover, .buttonIconBin:hover, .ButtonIconEdit:hover, .buttonIconOk:hover, .buttonIconShow:hover
 {
     cursor : pointer;
     filter : brightness(1.30);
