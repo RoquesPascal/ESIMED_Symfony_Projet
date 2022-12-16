@@ -8,12 +8,6 @@
         <a href="{{ path('admin_advert_list_published') }}"><button>Voir les annonces publi&eacute;es</button></a>
         <a href="{{ path('admin_advert_list_rejected') }}"><button>Voir les annonces rejet&eacute;es</button></a>
     </div>
-    <div class="blockButton">
-        <a href="{{ path('admin_category_index') }}"><button>Voir les cat&eacute;gories</button></a>
-    </div>
-    <div class="blockButton">
-        <a href="{{ path('admin_users') }}"><button>Voir les administrateurs</button></a>
-    </div>
 {% endblock %}
 
 {% block content %}
@@ -25,7 +19,7 @@
                     <option value="{{ category.getId() }}">{{ category.getName() }}</option>
                 {% endfor %}
             </select>
-            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" />
+            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" title="trier"/>
         </form>
     </div>
 

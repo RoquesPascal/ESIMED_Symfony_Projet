@@ -3,9 +3,9 @@
 {% block title %}Liste des annonces{% endblock %}
 
 {% block headerButtons %}
-    <div class="blockButton">
-        <a href="{{ path('admin_index') }}"><button>Liste des annonces</button></a>
-    </div>
+    <a href="{{ path('admin_index') }}">
+        <img class="buttonIconReturn" src="{{ asset('/ressources/images/IconReturn.png') }}" height="63" width="63" title="Retour"/>
+    </a>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
                     <option value="{{ category.getId() }}">{{ category.getName() }}</option>
                 {% endfor %}
             </select>
-            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" />
+            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" title="trier"/>
         </form>
     </div>
 

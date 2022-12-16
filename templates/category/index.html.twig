@@ -3,10 +3,9 @@
 {% block title %}Liste annonces{% endblock %}
 
 {% block headerButtons %}
-    <div class="blockButton">
-        <a href="{{ path('admin_index') }}"><button>Liste des annonces</button></a>
-        <a href="{{ path('admin_category_add') }}"><button>Ajouter une cat&eacute;gorie</button></a>
-    </div>
+    <a href="{{ path('admin_category_add') }}">
+        <img class="buttonIconAdd" src="{{ asset('/ressources/images/IconAdd.png') }}" height="63" width="63" title="Ajouter une cat&eacute;gorie"/>
+    </a>
 {% endblock %}
 
 {% block content %}

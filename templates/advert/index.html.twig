@@ -3,9 +3,9 @@
 {% block title %}Liste des annonces{% endblock %}
 
 {% block headerButtons %}
-    <div class="blockButton">
-        <a href="{{ path('add_advert') }}"><button>Ajouter une annonce</button></a>
-    </div>
+    <a href="{{ path('add_advert') }}">
+        <img class="buttonIconAdd" src="{{ asset('/ressources/images/IconAdd.png') }}" height="63" width="63" title="Cr&eacute;ez votre annonce !"/>
+    </a>
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
                     <option value="{{ category.getId() }}">{{ category.getName() }}</option>
                 {% endfor %}
             </select>
-            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" />
+            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" title="trier"/>
         </form>
     </div>
 

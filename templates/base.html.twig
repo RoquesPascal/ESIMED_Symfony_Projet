@@ -24,14 +24,24 @@
             <div>{% block headerButtons %}{% endblock %}</div>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('admin_logout') }}">
-                    <div class="buttonLoginLogout">
-                        <img src="{{ asset('/ressources/images/IconLogout.png') }}" height="63" width="63"/>
+                <a href="{{ path('admin_index') }}">
+                    <div class="buttonIconedminIndex">
+                        <img src="{{ asset('/ressources/images/IconedminIndex.png') }}" height="63" width="63" title="Liste des annonces"/>
                     </div>
                 </a>
-                <a href="{{ path('admin_index') }}">
+                <a href="{{ path('admin_category_index') }}">
+                    <div class="buttonIconCategory">
+                        <img src="{{ asset('/ressources/images/IconCategory.png') }}" height="63" width="63" title="Liste des cat&eacute;gories"/>
+                    </div>
+                </a>
+                <a href="{{ path('admin_users') }}">
                     <div class="buttonAdminIndex">
-                        <img src="{{ asset('/ressources/images/IconAdmin.png') }}" height="63" width="63"/>
+                        <img src="{{ asset('/ressources/images/IconAdmin.png') }}" height="63" width="63" title="Liste des administrateurs"/>
+                    </div>
+                </a>
+                <a href="{{ path('admin_logout') }}">
+                    <div class="buttonLoginLogout">
+                        <img src="{{ asset('/ressources/images/IconLogout.png') }}" height="63" width="63" title="Se d&eacute;connecter"/>
                     </div>
                 </a>
                 <div class="userName">
@@ -40,7 +50,7 @@
             {% else %}
                 <a href="{{ path('admin_login') }}">
                     <div class="buttonLoginLogout">
-                        <img src="{{ asset('/ressources/images/IconLogin.png') }}" height="63" width="63"/>
+                        <img src="{{ asset('/ressources/images/IconLogin.png') }}" height="63" width="63" title="Se connecter en administrateur"/>
                     </div>
                 </a>
             {% endif %}

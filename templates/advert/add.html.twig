@@ -3,9 +3,9 @@
 {% block title %}Ajout{% endblock %}
 
 {% block headerButtons %}
-        <div class="blockButton">
-            <a href="{{ path('index') }}"><button>Menu principal</button></a>
-        </div>
+    <a href="{{ path('index') }}">
+        <img class="buttonIconReturn" src="{{ asset('/ressources/images/IconReturn.png') }}" height="63" width="63" title="Retour"/>
+    </a>
 {% endblock %}
 
 {% block content %}

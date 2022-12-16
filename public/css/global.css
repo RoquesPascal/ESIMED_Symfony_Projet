@@ -11,9 +11,24 @@ body
     width      : fit-content;
 }
 
+.buttonIconAdd, .buttonIconReturn
+{
+    left : 49%;
+}
+
 .buttonAdminIndex
 {
     left : 92%;
+}
+
+.buttonIconedminIndex
+{
+    left : 84%;
+}
+
+.buttonIconCategory
+{
+    left : 88%;
 }
 
 .buttonLoginLogout
@@ -21,13 +36,13 @@ body
     left : 96%;
 }
 
-.buttonAdminIndex, .buttonLoginLogout
+.buttonIconAdd, .buttonAdminIndex, .buttonIconedminIndex, .buttonIconCategory, .buttonIconReturn, .buttonLoginLogout
 {
     position : absolute;
     top      : 5px;
 }
 
-.buttonAdminIndex:hover, .buttonLoginLogout:hover, .buttonIconBin:hover, .ButtonIconEdit:hover, .buttonIconOk:hover, .buttonIconShow:hover
+.buttonIconAdd:hover, .buttonAdminIndex:hover, .buttonIconedminIndex:hover, .buttonIconBin:hover, .buttonIconCategory:hover, .ButtonIconEdit:hover, .buttonIconOk:hover, .buttonIconReturn:hover, .buttonIconShow:hover, .buttonLoginLogout:hover
 {
     cursor : pointer;
     filter : brightness(1.30);
@@ -102,5 +117,5 @@ th
     font-size : 14px;
     position  : absolute;
     right     : 1%;
-    top       : 73px;
+    top       : 85px;
 }

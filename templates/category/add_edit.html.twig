@@ -9,9 +9,9 @@
 {% endblock %}
 
 {% block headerButtons %}
-    <div class="blockButton">
-        <a href="{{ path('admin_category_index') }}"><button>Liste des cat&eacute;gories</button></a>
-    </div>
+    <a href="{{ path('admin_category_index') }}">
+        <img class="buttonIconReturn" src="{{ asset('/ressources/images/IconReturn.png') }}" height="63" width="63" title="Retour"/>
+    </a>
 {% endblock %}
 
 {% block content %}

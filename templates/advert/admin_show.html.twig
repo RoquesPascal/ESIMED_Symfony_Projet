@@ -3,9 +3,9 @@
 {% block title %}D&eacute;tails de l'annonce{% endblock %}
 
 {% block headerButtons %}
-    <div class="blockButton">
-        <a href="{{ path('admin_index') }}"><button>Liste des annonces</button></a>
-    </div>
+    <a href="{{ path('admin_index') }}">
+        <img class="buttonIconReturn" src="{{ asset('/ressources/images/IconReturn.png') }}" height="63" width="63" title="Retour"/>
+    </a>
 {% endblock %}
 
 {% block content %}
