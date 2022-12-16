@@ -10,12 +10,14 @@
 
 {% block content %}
     <table>
-        <tr>
-            <th>id</th>
-            <th>Nom d'utilisateur</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         {% for adminUser in listAdminUsers %}
             <tr>
                 <td>{{ adminUser.getId() }}</td>

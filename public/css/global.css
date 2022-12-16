@@ -112,6 +112,13 @@ th
     padding          : 15px;
 }
 
+thead
+{
+    position : sticky;
+    top      : 115px;
+    z-index  : 90;
+}
+
 .userName
 {
     font-size : 14px;

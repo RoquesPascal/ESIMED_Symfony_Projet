@@ -10,11 +10,13 @@
 
 {% block content %}
     <table>
-        <tr>
-            <th>id</th>
-            <th>Libell&eacute;</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Libell&eacute;</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         {% for category in pager.currentPageResults %}
             <tr>
                 <td>{{ category.getId() }}</td>

@@ -24,17 +24,19 @@
 
     {% if(pager.currentPageResults != null) %}
         <table>
-            <tr>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Cat&eacute;gorie</th>
-                <th>Auteur</th>
-                <th>Email</th>
-                <th>Prix</th>
-                <th>Etat</th>
-                <th>Date de publication</th>
-                <th>Actions</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                    <th>Cat&eacute;gorie</th>
+                    <th>Auteur</th>
+                    <th>Email</th>
+                    <th>Prix</th>
+                    <th>Etat</th>
+                    <th>Date de publication</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
             {% for advert in pager.currentPageResults  %}
                 <tr>
                     <td>{{ advert.getTitle()|length > 35 ? advert.getTitle()|slice(0, 35) ~ '...' : advert.getTitle() }}</td>

@@ -18,17 +18,19 @@
 
 {% block content %}
     <table>
-        <tr>
-            <th>id</th>
-            <th>Titre</th>
-            <th>Contenu</th>
-            <th>Cat&eacute;gorie</th>
-            <th>Auteur</th>
-            <th>Email</th>
-            <th>Prix</th>
-            <th>Date de cr&eacute;ation</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Cat&eacute;gorie</th>
+                <th>Auteur</th>
+                <th>Email</th>
+                <th>Prix</th>
+                <th>Date de cr&eacute;ation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         {% for advert in pager.currentPageResults %}
             <tr>
                 <td>{{ advert.getId() }}</td>

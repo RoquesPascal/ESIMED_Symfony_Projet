@@ -23,17 +23,19 @@
     </div>
 
     <table>
-        <tr>
-            <th>Titre</th>
-            <th>Contenu</th>
-            <th>Cat&eacute;gorie</th>
-            <th>Auteur</th>
-            <th>Email</th>
-            <th>Prix</th>
-            <th>Etat</th>
-            <th>Date de publication</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Cat&eacute;gorie</th>
+                <th>Auteur</th>
+                <th>Email</th>
+                <th>Prix</th>
+                <th>Etat</th>
+                <th>Date de publication</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         {% for advertPublished in pager.currentPageResults  %}
             <tr>
                 <td>{{ advertPublished.getTitle()|length > 35 ? advertPublished.getTitle()|slice(0, 35) ~ '...' : advertPublished.getTitle() }}</td>
