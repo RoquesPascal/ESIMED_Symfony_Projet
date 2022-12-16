@@ -40,12 +40,20 @@
                 <td>{{ advert.getPrice() }}</td>
                 <td>{{ advert.getCreatedAt()|date("d-m-Y H:i:s") }}</td>
                 <td>
-                    <a href="{{ path('admin_show', {'id': advert.getId()}) }}"><button>Voir</button></a>
+                    <a href="{{ path('admin_show', {'id': advert.getId()}) }}">
+                        <img src="{{ asset('/ressources/images/IconShow.png') }}" height="30" width="30"/>
+                    </a>
                     {% if advertSate == 'draft' %}
-                        <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advertSate}) }}"><button>Publier</button></a>
-                        <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}"><button>Rejeter</button></a>
+                        <a href="{{ path('admin_advertvalidation_validate', {'id': advert.getId(), 'view': advertSate}) }}">
+                            <img src="{{ asset('/ressources/images/IconOk.png') }}" height="30" width="30"/>
+                        </a>
+                        <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}">
+                            <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                        </a>
                     {% elseif advertSate == 'published' %}
-                        <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}"><button>Rejeter</button></a>
+                        <a href="{{ path('admin_advertvalidation_reject', {'id': advert.getId(), 'view': advertSate}) }}">
+                            <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                        </a>
                     {% endif %}
                 </td>
             </tr>

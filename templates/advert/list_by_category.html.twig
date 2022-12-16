@@ -45,7 +45,11 @@
                     <td>{{ advert.getPrice() }}</td>
                     <td>{{ advert.getState() }}</td>
                     <td>{{ advert.getPublishedAt()|date("d-m-Y H:i:s") }}</td>
-                    <td><a href="{{ path('show', {'id': advert.getId()}) }}"><button>Voir</button></a></td>
+                    <td>
+                        <a href="{{ path('show', {'id': advert.getId()}) }}">
+                            <img src="{{ asset('/ressources/images/IconShow.png') }}" height="30" width="30"/>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

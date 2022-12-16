@@ -21,9 +21,13 @@
                 <td>{{ category.getId() }}</td>
                 <td>{{ category.getName() }}</td>
                 <td>
-                    <a href="{{ path('admin_category_edit', { 'id': category.getId()}) }}"><button>Modifier</button></a>
+                    <a href="{{ path('admin_category_edit', { 'id': category.getId()}) }}">
+                        <img src="{{ asset('/ressources/images/IconEdit.png') }}" height="30" width="30"/>
+                    </a>
                     {% if(category.getId() not in listCategoriesDeletable) %}
-                        <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}"><button>Supprimer</button></a>
+                        <a href="{{ path('admin_category_delete', { 'id': category.getId()}) }}">
+                            <img src="{{ asset('/ressources/images/IconBin.png') }}" height="30" width="30"/>
+                        </a>
                     {% endif %}
                 </td>
             </tr>
