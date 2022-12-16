@@ -51,9 +51,9 @@ header
 {
     background-color : #f8f8f8;
     border-bottom    : 1px solid #a1a2b4;
-    height           : 110px;
+    height           : 100px;
     margin-bottom    : 2%;
-    padding : 10px;
+    padding          : 10px;
     position         : sticky;
     top              : 0px;
     z-index          : 99;
