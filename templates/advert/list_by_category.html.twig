@@ -11,14 +11,14 @@
 {% block content %}
 
     <div class="formSortByCategory">
-        <form action="{{ path('index') }}" method="post">
+        <form action="{{ path('index') }}" method="post" onsubmit="redirect();return false;">
             <select name="category" required>
-                <option value="">S&eacute;lectionner une cat&eacute;gorie</option>
+                <option value="">Triez par cat&eacute;gorie</option>
                 {% for category in listCategoriesWithPublishedAdverts %}
                     <option value="{{ category.getId() }}">{{ category.getName() }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Rechercher par cat&eacute;gorie</button>
+            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" />
         </form>
     </div>
 

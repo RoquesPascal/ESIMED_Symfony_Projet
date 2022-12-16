@@ -7,15 +7,21 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('admin_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="">
+    <div class="formLogin">
+        <form action="{{ path('admin_login') }}" method="post">
+            <label for="username">Email : </label>
+            <input type="text" id="username" name="_username" value="">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password">
+            <hr width="100%"/>
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <label for="password">Mot de passe : </label>
+            <input type="password" id="password" name="_password">
 
-        <button type="submit" name="loginButton">login</button>
-    </form>
+            <hr width="100%"/>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button type="submit" name="loginButton">Se connecter</button>
+        </form>
+    </div>
 {% endblock %}

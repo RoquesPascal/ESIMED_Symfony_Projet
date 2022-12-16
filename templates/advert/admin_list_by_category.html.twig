@@ -9,6 +9,18 @@
 {% endblock %}
 
 {% block content %}
+    <div class="formSortByCategory">
+        <form action="{{ path('admin_index') }}" method="post" onsubmit="redirect();return false;">
+            <select name="category" required>
+                <option value="">Triez par cat&eacute;gorie</option>
+                {% for category in listCategoriesWithAdverts %}
+                    <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+                {% endfor %}
+            </select>
+            <input type="image" src="{{ asset('/ressources/images/IconSearch.png') }}" alt="Submit" name="submit" width="20px" />
+        </form>
+    </div>
+
     {% if(pager.currentPageResults != null) %}
         <table>
             <tr>

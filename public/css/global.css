@@ -33,7 +33,7 @@ body
     filter : brightness(1.30);
 }
 
-.formAddAdvert, .formAddEditAdminUser, .formAddEditCategory
+.formAddAdvert, .formAddEditAdminUser, .formAddEditCategory, .formLogin
 {
     margin     : auto;
     padding    : 15px;
