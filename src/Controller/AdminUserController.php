@@ -56,7 +56,7 @@ class AdminUserController extends AbstractController
     public function admin_users(AdminUserRepository $adminUserRepository): Response
     {
         $listAdminUsers = $adminUserRepository->findAll();
-        return $this->render('admin_user/list.html.twig', [
+        return $this->render('admin_user/index.html.twig', [
             'listAdminUsers' => $listAdminUsers,
         ]);
     }
