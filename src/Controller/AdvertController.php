@@ -271,11 +271,11 @@ class AdvertController extends AbstractController
         switch($emailType)
         {
             case 'emailNewAdvert':
-                $subject = "Nouvelle annonce !";
+                $subject = "(Admin LeBonAngle) Nouvelle annonce !";
                 $emailBody = $this->writeEmailNewAdvert($advert);
                 break;
             case 'emailAdvertPublished':
-                $subject = "Votre annonce a été publiée !";
+                $subject = "Votre annonce a été publiée sur LeBonAngle !";
                 $emailBody = $this->writeEmailAdvertPublished($advert);
                 break;
             default:
