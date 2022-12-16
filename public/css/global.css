@@ -16,14 +16,14 @@ body
     left : 49%;
 }
 
-.buttonAdminIndex
-{
-    left : 92%;
-}
-
-.buttonIconedminIndex
+.buttonIconAdminIndex
 {
     left : 84%;
+}
+
+.buttonIconAdminList
+{
+    left : 92%;
 }
 
 .buttonIconCategory
@@ -36,13 +36,13 @@ body
     left : 96%;
 }
 
-.buttonIconAdd, .buttonAdminIndex, .buttonIconedminIndex, .buttonIconCategory, .buttonIconReturn, .buttonLoginLogout
+.buttonIconAdd, .buttonIconAdminIndex, .buttonIconAdminList, .buttonIconCategory, .buttonIconReturn, .buttonLoginLogout
 {
     position : absolute;
     top      : 5px;
 }
 
-.buttonIconAdd:hover, .buttonAdminIndex:hover, .buttonIconedminIndex:hover, .buttonIconBin:hover, .buttonIconCategory:hover, .ButtonIconEdit:hover, .buttonIconOk:hover, .buttonIconReturn:hover, .buttonIconShow:hover, .buttonLoginLogout:hover
+.buttonIconAdd:hover, .buttonIconAdminIndex:hover, .buttonIconAdminList:hover, .buttonIconBin:hover, .buttonIconCategory:hover, .ButtonIconEdit:hover, .buttonIconOk:hover, .buttonIconReturn:hover, .buttonIconShow:hover, .buttonLoginLogout:hover
 {
     cursor : pointer;
     filter : brightness(1.30);
@@ -80,6 +80,11 @@ hr
     margin-top    : 2em;
 }
 
+.logoLeBonAngle
+{
+    float : left;
+}
+
 table
 {
     border-collapse : collapse;
@@ -87,7 +92,7 @@ table
     margin          : auto;
 }
 
-table tr:nth-child(odd) /* Mettre 1 ligne sur 2 d'une autre couleur */
+table tr:nth-child(odd)
 {
     background-color : #f0f0f0;
 }
