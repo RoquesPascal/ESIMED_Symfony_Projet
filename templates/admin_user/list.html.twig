@@ -3,8 +3,10 @@
 {% block title %}Liste des utilisateur{% endblock %}
 
 {% block headerButtons %}
-    <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
-    <a href="{{ path('admin_users_add') }}"><button>Ajouter un administrateur</button></a>
+    <div class="blockButton">
+        <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+        <a href="{{ path('admin_users_add') }}"><button>Ajouter un administrateur</button></a>
+    </div>
 {% endblock %}
 
 {% block content %}

@@ -21,7 +21,7 @@
                 </a>
             </div>
 
-            <div class="blockButton">{% block headerButtons %}{% endblock %}</div>
+            <div>{% block headerButtons %}{% endblock %}</div>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{ path('admin_logout') }}">
@@ -34,7 +34,9 @@
                         <img src="{{ asset('/ressources/images/IconAdmin.png') }}" height="63" width="63"/>
                     </div>
                 </a>
-                {{ app.user.username }} | {{ app.user.email }}
+                <div class="userName">
+                    <img src="{{ asset('/ressources/images/IconUserConnected.png') }}" height="14" width="14"/> {{ app.user.username }} | {{ app.user.email }}
+                </div>
             {% else %}
                 <a href="{{ path('admin_login') }}">
                     <div class="buttonLoginLogout">

@@ -3,8 +3,10 @@
 {% block title %}Liste annonces{% endblock %}
 
 {% block headerButtons %}
-    <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
-    <a href="{{ path('admin_category_add') }}"><button>Ajouter une cat&eacute;gorie (admin)</button></a>
+    <div class="blockButton">
+        <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+        <a href="{{ path('admin_category_add') }}"><button>Ajouter une cat&eacute;gorie (admin)</button></a>
+    </div>
 {% endblock %}
 
 {% block content %}

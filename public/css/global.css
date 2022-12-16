@@ -6,10 +6,8 @@ body
 
 .blockButton
 {
-    /*float : left;*/
-    /*margin-right : 10px;*/
-    text-align: center;
-    margin : auto;
+    margin     : 0px auto 10px auto ;
+    text-align : center;
     width      : fit-content;
 }
 
@@ -55,6 +53,7 @@ header
     border-bottom    : 1px solid #a1a2b4;
     height           : 110px;
     margin-bottom    : 2%;
+    padding : 10px;
     position         : sticky;
     top              : 0px;
     z-index          : 99;
@@ -96,4 +95,12 @@ th
     font-size        : 25px;
     font-weight      : bold;
     padding          : 15px;
+}
+
+.userName
+{
+    font-size : 14px;
+    position  : absolute;
+    right     : 1%;
+    top       : 73px;
 }

@@ -11,7 +11,9 @@
 {% endblock %}
 
 {% block headerButtons %}
-    <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+    <div class="blockButton">
+        <a href="{{ path('admin_index') }}"><button>Liste des annonces (admin)</button></a>
+    </div>
 {% endblock %}
 
 {% block content %}

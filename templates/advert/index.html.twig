@@ -3,7 +3,9 @@
 {% block title %}Liste des annonces{% endblock %}
 
 {% block headerButtons %}
-    <a href="{{ path('add_advert') }}"><button>Ajouter une annonce</button></a>
+    <div class="blockButton">
+        <a href="{{ path('add_advert') }}"><button>Ajouter une annonce</button></a>
+    </div>
 {% endblock %}
 
 {% block content %}
